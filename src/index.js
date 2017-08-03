@@ -1,17 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {HashRouter, Route} from 'react-router-dom';
+import {BrowserRouter, Route} from 'react-router-dom';
 import './index.css';
-import App from './App';
+import Header from './components/common/Header'
+import HomePage from './components/HomePage'
 import TestPage from './TestPage';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
-  <HashRouter>
+  <BrowserRouter>
     <div>
-      <Route path='/' component={App} />
+      <Route path='/' component={Header} />
+      <Route exact path='/' component={HomePage} />
       <Route path='/test' component={TestPage} />
     </div>
-  </HashRouter>, document.getElementById('root'));
+  </BrowserRouter>, document.getElementById('root'));
 
 registerServiceWorker();
