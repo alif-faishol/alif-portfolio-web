@@ -1,6 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {BrowserRouter, Route} from 'react-router-dom';
+import './bootstrap.min.css'
 import styled from 'styled-components'
 import NavBar from './components/common/NavBar'
 import HomePage from './components/HomePage'
@@ -15,13 +16,18 @@ const Root = styled.div`
 
 const Container = styled.div`
   position: relative;
+  @media (min-width: 1199px) and (max-width: 1280px) {
+    margin: 0 50px;
+  }
+  @media (min-width: 992px) and (max-width: 1080px) {
+    margin: 0 50px;
+  }
   background-color: white;
-  margin: auto;
-  max-width: 800px;
 `
 
 render(
   <Root>
+    <div className='container'>
     <Container>
       <BrowserRouter>
         <div>
@@ -30,6 +36,7 @@ render(
         </div>
       </BrowserRouter>
     </Container>
+  </div>
   </Root>, document.getElementById('root'));
 
 registerServiceWorker();

@@ -11,9 +11,9 @@ class HomePage extends React.Component {
   }
   render() {
     return (
-      <div style={{ textAlign: 'center'}} >
+      <div className='container-fluid' style={{ textAlign: 'center'}} >
         <p>This is HomePage</p>
-        <div style={{ maxWidth: '800px', margin: '0 auto' }} dangerouslySetInnerHTML={{ __html: this.state.api }}></div>
+        <div dangerouslySetInnerHTML={{ __html: this.state.api }}></div>
       </div>
     )
   }
