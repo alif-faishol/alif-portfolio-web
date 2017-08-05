@@ -1,15 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {render} from 'react-dom';
 import {BrowserRouter, Route} from 'react-router-dom';
-import Header from './components/common/Header'
+import 'bootstrap/dist/css/bootstrap.css'
+import NavBar from './components/common/NavBar'
 import HomePage from './components/HomePage'
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(
-  <div>
+render(
+  <div style={{ position: 'relative' }}className='container' >
     <BrowserRouter>
       <div>
-        <Route path='/' component={Header} />
+        <Route path='/' component={NavBar} />
         <Route exact path='/' component={HomePage} />
       </div>
     </BrowserRouter>

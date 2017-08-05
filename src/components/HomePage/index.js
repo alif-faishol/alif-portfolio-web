@@ -7,13 +7,13 @@ class HomePage extends React.Component {
   }
   constructor(props) {
     super(props)
-    api.then(res => this.setState({ api: res.data.content }))
+    api.getItem('pages', 1).then(res => this.setState({ api: res.data.content }))
   }
   render() {
     return (
-      <div>
+      <div style={{ textAlign: 'center'}} >
         <p>This is HomePage</p>
-        <p dangerouslySetInnerHTML={{ __html: this.state.api }}></p>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }} dangerouslySetInnerHTML={{ __html: this.state.api }}></div>
       </div>
     )
   }
