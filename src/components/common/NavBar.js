@@ -1,16 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import styled from 'styled-components'
 
 const styles = {
-  container: {
-    position: 'absolute',
-    top: '25px',
-    left: '-80px',
-    backgroundColor: 'white',
-    color: 'blue',
-    width: '80px',
-    boxShadow: '0 0 15px rgba(171, 171, 171, 0.5)'
-  },
   link: {
     display: 'block',
     textAlign: 'center',
@@ -18,12 +10,26 @@ const styles = {
   }
 }
 
+const Container = styled.div`
+  position: absolute;
+  top: 25px;
+  left: -80px;
+  background-color: white;
+  color: blue;
+  width: 80px;
+  z-index: 0;
+  box-shadow: -4px 3px 8px rgba(171, 171, 171, 0.5);
+  @media (max-width: 900px) {
+    background-color: red;
+  }
+`
+
 export default () => {
   return (
-    <div style={styles.container} >
+    <Container>
       <div>
         <Link to='/' style={styles.link}>Home</Link>
       </div>
-    </div>
+    </Container>
   )
 }
