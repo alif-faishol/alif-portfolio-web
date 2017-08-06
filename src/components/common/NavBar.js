@@ -16,20 +16,22 @@ const Container = styled.nav`
   }
 `
 
-injectGlobal(["@import url('https://fonts.googleapis.com/css?family=Actor');"])
+injectGlobal(["@import url('https://fonts.googleapis.com/css?family=Lato');"])
 
 const StyledLink = styled(NavLink)`
   position: relative;
+  display: table;
   height: 50px;
   font-size: 20px;
   width: 100%;
   color: white;
-  -webkit-font-smoothing: antialiased;
   :hover {
-    color: red;
+    text-decoration: none;
+    color: white;
   }
+  -webkit-font-smoothing: antialiased;
   display: block;
-  font-family: 'Actor', sans-serif;
+  font-family: 'Lato', sans-serif;
   div:first-child {
     margin: 0;
     position: absolute;
@@ -43,7 +45,7 @@ const StyledLink = styled(NavLink)`
 const LinkDesc = styled.div`
   display: table-cell;
   vertical-align: middle;
-  position: absolute;
+  position: relative;
   height: 50px;
   padding: 0 20px;
   background-color: #333333;
@@ -52,9 +54,9 @@ const LinkDesc = styled.div`
   opacity: 0;
   left: 0;
   transition: all 0.2s ease-out;
-  transition-delay: 0.2s;
   p {
     margin: 0;
+    display: block;
   }
   ${StyledLink}:hover & {
     visibility: visible;
