@@ -1,6 +1,6 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-import styled from 'styled-components'
+import {NavLink} from 'react-router-dom'
+import styled, {injectGlobal} from 'styled-components'
 
 const Container = styled.nav`
   position: absolute;
@@ -16,15 +16,21 @@ const Container = styled.nav`
   }
 `
 
-const StyledLink = styled(Link)`
+injectGlobal(["@import url('https://fonts.googleapis.com/css?family=Actor');"])
+
+const StyledLink = styled(NavLink)`
   position: relative;
   height: 50px;
   font-size: 20px;
   width: 100%;
   color: white;
+  -webkit-font-smoothing: antialiased;
+  :hover {
+    color: red;
+  }
   display: block;
-  font-family: 'Fira Code', sans-serif;
-  > * {
+  font-family: 'Actor', sans-serif;
+  div:first-child {
     margin: 0;
     position: absolute;
     top: 50%;
@@ -34,20 +40,43 @@ const StyledLink = styled(Link)`
   }
 `
 
+const LinkDesc = styled.div`
+  display: table-cell;
+  vertical-align: middle;
+  position: absolute;
+  height: 50px;
+  padding: 0 20px;
+  background-color: #333333;
+  margin: 0;
+  visibility: hidden;
+  opacity: 0;
+  left: 0;
+  transition: all 0.2s ease-out;
+  transition-delay: 0.2s;
+  p {
+    margin: 0;
+  }
+  ${StyledLink}:hover & {
+    visibility: visible;
+    opacity: 1;
+    left: 50px;
+  }
+`
+
 export default () => {
   return (
     <Container>
-      <StyledLink to='/'>
+      <StyledLink activeStyle={{backgroundColor: '#0099ff'}} to='/'>
         <div>/</div>
+        <LinkDesc><p>Homepage</p></LinkDesc>
       </StyledLink>
-      <StyledLink to='/'>
+      <StyledLink activeStyle={{backgroundColor: '#0099ff'}} to='/portfolio'>
         <div>/</div>
+        <LinkDesc><p>Portfolio</p></LinkDesc>
       </StyledLink>
-      <StyledLink to='/'>
+      <StyledLink activeStyle={{backgroundColor: '#0099ff'}} to='/about'>
         <div>/</div>
-      </StyledLink>
-      <StyledLink to='/'>
-        <div>/</div>
+        <LinkDesc><p>About</p></LinkDesc>
       </StyledLink>
     </Container>
   )
