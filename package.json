@@ -40,6 +40,7 @@
     "style-loader": "0.18.2",
     "styled-components": "^2.1.2",
     "sw-precache-webpack-plugin": "0.11.3",
+    "typicons.font": "^2.0.9",
     "url-loader": "0.5.9",
     "webpack": "2.6.1",
     "webpack-dev-server": "2.5.0",

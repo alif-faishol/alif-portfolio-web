@@ -16,13 +16,14 @@ const Container = styled.nav`
   }
 `
 
-injectGlobal(["@import url('https://fonts.googleapis.com/css?family=Lato');"])
+injectGlobal(["@import url('https://fonts.googleapis.com/css?family=Cairo');"])
 
 const StyledLink = styled(NavLink)`
   position: relative;
   display: table;
   height: 50px;
   font-size: 20px;
+  background-color: inherit;
   width: 100%;
   color: white;
   :hover {
@@ -31,7 +32,7 @@ const StyledLink = styled(NavLink)`
   }
   -webkit-font-smoothing: antialiased;
   display: block;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Cairo', sans-serif;
   div:first-child {
     margin: 0;
     position: absolute;
@@ -47,8 +48,9 @@ const LinkDesc = styled.div`
   vertical-align: middle;
   position: relative;
   height: 50px;
+  box-shadow: 4px 3px 8px rgba(171, 171, 171, 0.5);
   padding: 0 20px;
-  background-color: #333333;
+  background-color: inherit;
   margin: 0;
   visibility: hidden;
   opacity: 0;
@@ -69,15 +71,15 @@ export default () => {
   return (
     <Container>
       <StyledLink activeStyle={{backgroundColor: '#0099ff'}} to='/'>
-        <div>/</div>
+        <div><span className="typcn typcn-home"></span></div>
         <LinkDesc><p>Homepage</p></LinkDesc>
       </StyledLink>
       <StyledLink activeStyle={{backgroundColor: '#0099ff'}} to='/portfolio'>
-        <div>/</div>
+        <div><span className="typcn typcn-star"></span></div>
         <LinkDesc><p>Portfolio</p></LinkDesc>
       </StyledLink>
       <StyledLink activeStyle={{backgroundColor: '#0099ff'}} to='/about'>
-        <div>/</div>
+        <div><span className="typcn typcn-info-large"></span></div>
         <LinkDesc><p>About</p></LinkDesc>
       </StyledLink>
     </Container>

@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import NavBar from './components/common/NavBar'
 import HomePage from './components/HomePage'
 import registerServiceWorker from './registerServiceWorker';
+import '../node_modules/typicons.font/src/font/typicons.css'
 
 const Root = styled.div`
   background-color: rgb(204, 204, 255);
@@ -25,18 +26,24 @@ const Container = styled.div`
   background-color: white;
 `
 
+const Helper = styled.div`
+  @media (max-width: 767px) {
+    background-color: white;
+  }
+`
+
 render(
   <Root>
-    <div className='container'>
-    <Container>
-      <BrowserRouter>
-        <div>
-          <Route path='/' component={NavBar} />
-          <Route exact path='/' component={HomePage} />
-        </div>
-      </BrowserRouter>
-    </Container>
-  </div>
+    <Helper className='container'>
+      <Container>
+        <BrowserRouter>
+          <div>
+            <Route path='/' component={NavBar} />
+            <Route exact path='/' component={HomePage} />
+          </div>
+        </BrowserRouter>
+      </Container>
+    </Helper>
   </Root>, document.getElementById('root'));
 
 registerServiceWorker();
