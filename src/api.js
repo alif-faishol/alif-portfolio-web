@@ -1,5 +1,4 @@
-import sdk from 'directus-sdk-javascript/remote'
+import {get} from 'axios'
 
-export default new sdk({
-  url: 'https://128.199.89.68/api/1.1/'
-})
+
+export default props => get('https://directusapi.alifaishol-test.tk/api/1.1/' + props)

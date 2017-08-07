@@ -7,7 +7,9 @@ class HomePage extends React.Component {
   }
   constructor(props) {
     super(props)
-    api.getItem('pages', 1).then(res => this.setState({ api: res.data.content }))
+    api('tables/portfolio/rows/1')
+      .then(res => this.setState({ api: res.data.data.content }))
+      .catch(err => this.setState({ api: err }))
   }
   render() {
     return (

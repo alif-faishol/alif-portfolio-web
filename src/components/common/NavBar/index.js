@@ -26,7 +26,7 @@ const StyledLink = styled(NavLink)`
   background-color: inherit;
   width: 100%;
   color: white;
-  :hover {
+  :hover, &:visited, &:link, &:active {
     text-decoration: none;
     color: white;
   }
@@ -36,6 +36,7 @@ const StyledLink = styled(NavLink)`
   div:first-child {
     margin: 0;
     position: absolute;
+    z-index: 2;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -45,6 +46,7 @@ const StyledLink = styled(NavLink)`
 
 const LinkDesc = styled.div`
   display: table-cell;
+  z-index: 1;
   vertical-align: middle;
   position: relative;
   height: 50px;
@@ -59,6 +61,7 @@ const LinkDesc = styled.div`
   p {
     margin: 0;
     display: block;
+    z-index: 1;
   }
   ${StyledLink}:hover & {
     visibility: visible;
@@ -70,7 +73,7 @@ const LinkDesc = styled.div`
 export default () => {
   return (
     <Container>
-      <StyledLink activeStyle={{backgroundColor: '#0099ff'}} to='/'>
+      <StyledLink exact activeStyle={{backgroundColor: '#0099ff'}} to='/'>
         <div><span className="typcn typcn-home"></span></div>
         <LinkDesc><p>Homepage</p></LinkDesc>
       </StyledLink>
