@@ -21,7 +21,6 @@ const Item = props => {
     width: 100%;
     height: 100%;
   `
-
   return (
     <Container className={props.className}>
       <Content thumbnail={props.thumbnail}>
