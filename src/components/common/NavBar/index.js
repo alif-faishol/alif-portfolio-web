@@ -4,7 +4,7 @@ import styled, {injectGlobal} from 'styled-components'
 
 const Container = styled.nav`
   position: absolute;
-  background-color: #333333;
+  background-color: #242c36;
   top: 20px;
   color: blue;
   width: 50px;

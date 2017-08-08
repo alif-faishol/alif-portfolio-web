@@ -5,14 +5,15 @@ import './bootstrap.min.css'
 import styled from 'styled-components'
 import NavBar from './components/common/NavBar'
 import HomePage from './components/HomePage'
+import Portfolio from './components/Portfolio'
 import registerServiceWorker from './registerServiceWorker';
 import '../node_modules/typicons.font/src/font/typicons.css'
 
 const Root = styled.div`
-  background-color: rgb(204, 204, 255);
   width: 100%;
   height: 100%;
   position: absolute;
+  background-color: #eeeeee;
 `
 
 const Container = styled.div`
@@ -40,6 +41,7 @@ render(
           <div>
             <Route path='/' component={NavBar} />
             <Route exact path='/' component={HomePage} />
+            <Route exact path='/portfolio' component={Portfolio} />
           </div>
         </BrowserRouter>
       </Container>
