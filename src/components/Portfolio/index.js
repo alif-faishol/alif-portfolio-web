@@ -1,6 +1,7 @@
 import React from 'react'
 import api from '../../api'
 import ImageGallery from './ImageGallery'
+import PageTitle from '../common/PageTitle'
 
 class Portfolio extends React.Component {
   state = {
@@ -14,7 +15,7 @@ class Portfolio extends React.Component {
   render() {
     return (
       <div>
-        <div></div>
+        <PageTitle title='Portfolio' />
         <ImageGallery items={this.state.items} /> 
       </div>
     )

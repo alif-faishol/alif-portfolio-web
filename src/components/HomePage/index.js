@@ -1,4 +1,5 @@
 import React from 'react'
+import PageTitle from '../common/PageTitle'
 
 class HomePage extends React.Component {
   state = {
@@ -6,8 +7,8 @@ class HomePage extends React.Component {
   }
   render() {
     return (
-      <div className='container-fluid' style={{ textAlign: 'center'}} >
-        <p>This is HomePage</p>
+      <div>
+        <PageTitle title='Homepage' />
         {/*<div dangerouslySetInnerHTML={{ __html: this.state.api }}></div>*/}
       </div>
     )
