@@ -16,15 +16,19 @@ const Item = props => {
   `
   const Content = styled.div`
     position: absolute;
-    background-image: ${'url(\'' + (props ? props.thumbnail : '') + '\')'} ;
+    top: 0;
+    bottom 0;
+    left: 0;
+    right: 0;
+    background-image: ${'url(\'' + (props ? props.thumbnail : '') + '\')'};
     background-size: contain;
-    width: 100%;
+    background-repeat: no-repeat;
     height: 100%;
   `
   return (
     <Container className={props.className}>
       <Content thumbnail={props.thumbnail}>
-      test
+        {props.title}
       </Content>
     </Container>
   )
@@ -33,10 +37,15 @@ const Item = props => {
 export default props => {
   return (
     <Container className='row'>
-      <Item className='col-xs-4' thumbnail={props ? props.thumbnail : ''}></Item>
-      <Item className='col-xs-4'></Item>
-      <Item className='col-xs-4'></Item>
-      <Item className='col-xs-4'></Item>
+      {props.items.map(index => {
+        return (
+          <Item className='col-xs-4'
+            key={index.id}
+            thumbnail={index.img}
+            title={index.title}
+          />
+        )
+      })}
     </Container>
   )
 }

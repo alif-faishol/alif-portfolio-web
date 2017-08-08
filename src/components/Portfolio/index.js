@@ -31,7 +31,7 @@ class Portfolio extends React.Component {
     return (
       <div>
         <div></div>
-        <ImageGallery thumbnail={this.state.items[0] ? this.state.items[0].img : ''} items={this.state.items} />
+        <ImageGallery items={this.state.items} /> 
       </div>
     )
   }
