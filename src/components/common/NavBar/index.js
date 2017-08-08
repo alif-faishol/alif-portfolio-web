@@ -58,8 +58,11 @@ const LinkDesc = styled.div`
   transition: all 0.2s ease-out;
   p {
     margin: 0;
-    display: block;
+    display: none;
     z-index: 1;
+    ${StyledLink}:hover & {
+      display: block;
+    }
   }
   ${StyledLink}:hover & {
     visibility: visible;
