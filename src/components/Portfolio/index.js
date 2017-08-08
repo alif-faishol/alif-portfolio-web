@@ -1,6 +1,7 @@
 import React from 'react'
 import api, {apiRoot} from '../../api'
 import styled from 'styled-components'
+import ImageGallery from './ImageGallery'
 
 const Container = styled.div`
 
@@ -26,7 +27,8 @@ const Gallery = (props) => {
 
 class Portfolio extends React.Component {
   state = {
-    items: []
+    items: [],
+    img: ''
   }
   constructor(props) {
     super(props)
@@ -37,15 +39,18 @@ class Portfolio extends React.Component {
         })
         )
       })
+    api('tables/portfolio/rows')
+      .then(res => {
+        this.setState({img: res.data[1].images.data[0].url})
+        console.log(this.state.img)
+      })
   }
   render() {
     return (
-      <div>
-        <Container>
-          <Info></Info>
-          <Gallery items={this.state.items} />
-        </Container>
-      </div>
+      <Container>
+        <Info></Info>
+        <ImageGallery thumbnail={'https://directusapi.alifaishol-test.tk/' + this.state.img} items={this.state.items} />
+      </Container>
     )
   }
 }

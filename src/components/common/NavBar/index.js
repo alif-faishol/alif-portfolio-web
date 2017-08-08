@@ -8,7 +8,6 @@ const Container = styled.nav`
   top: 20px;
   color: blue;
   width: 50px;
-  z-index: 0;
   box-shadow: 3px 3px 8px rgba(171, 171, 171, 0.5);
   @media (min-width: 992px) {
     left: -50px;
@@ -25,6 +24,7 @@ const StyledLink = styled(NavLink)`
   font-size: 20px;
   background-color: inherit;
   width: 100%;
+  z-index: 99;
   color: white;
   :hover, &:visited, &:link, &:active {
     text-decoration: none;
@@ -36,7 +36,6 @@ const StyledLink = styled(NavLink)`
   div:first-child {
     margin: 0;
     position: absolute;
-    z-index: 2;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -46,7 +45,6 @@ const StyledLink = styled(NavLink)`
 
 const LinkDesc = styled.div`
   display: table-cell;
-  z-index: 1;
   vertical-align: middle;
   position: relative;
   height: 50px;
