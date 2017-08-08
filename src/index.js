@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import NavBar from './components/common/NavBar'
 import HomePage from './components/HomePage'
 import Portfolio from './components/Portfolio'
+import About from './components/About'
 import registerServiceWorker from './registerServiceWorker';
 import '../node_modules/typicons.font/src/font/typicons.css'
 
@@ -42,6 +43,7 @@ render(
             <Route path='/' component={NavBar} />
             <Route exact path='/' component={HomePage} />
             <Route exact path='/portfolio' component={Portfolio} />
+            <Route exact path='/about' component={About} />
           </div>
         </BrowserRouter>
       </Container>
