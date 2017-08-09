@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Container = styled.div`
+  padding: 0 10%;
   border: 1px solid black;
 `
 
@@ -34,8 +35,9 @@ const Item = props => {
   )
 }
 
+
 export default props => {
-  return (
+  return props.items ? (
     <Container className='row'>
       {props.items.map(index => {
         return (
@@ -47,5 +49,5 @@ export default props => {
         )
       })}
     </Container>
-  )
+  ) : null
 }

@@ -1,13 +1,13 @@
-import React from 'react';
-import {render} from 'react-dom';
-import {BrowserRouter, Route} from 'react-router-dom';
+import React from 'react'
+import {render} from 'react-dom'
+import {BrowserRouter, Route} from 'react-router-dom'
 import './bootstrap.min.css'
 import styled from 'styled-components'
 import NavBar from './components/common/NavBar'
 import HomePage from './components/HomePage'
 import Portfolio from './components/Portfolio'
 import About from './components/About'
-import registerServiceWorker from './registerServiceWorker';
+import registerServiceWorker from './registerServiceWorker'
 import '../node_modules/typicons.font/src/font/typicons.css'
 
 const Root = styled.div`
@@ -48,6 +48,6 @@ render(
         </BrowserRouter>
       </Container>
     </Helper>
-  </Root>, document.getElementById('root'));
+  </Root>, document.getElementById('root'))
 
-registerServiceWorker();
+registerServiceWorker()
