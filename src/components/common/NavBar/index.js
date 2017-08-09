@@ -5,9 +5,11 @@ import styled, {injectGlobal} from 'styled-components'
 const Container = styled.nav`
   position: absolute;
   background-color: #242c36;
+  z-index: 99;
   top: 20px;
   color: blue;
   width: 50px;
+  left: 0;
   box-shadow: 3px 3px 8px rgba(171, 171, 171, 0.5);
   @media (min-width: 992px) {
     left: -50px;
@@ -24,7 +26,6 @@ const StyledLink = styled(NavLink)`
   font-size: 20px;
   background-color: inherit;
   width: 100%;
-  z-index: 99;
   color: white;
   :hover, &:visited, &:link, &:active {
     text-decoration: none;

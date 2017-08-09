@@ -4,11 +4,11 @@ import ImageGallery from './ImageGallery'
 import PageTitle from '../common/PageTitle'
 
 class Portfolio extends React.Component {
-  state = {
-    items: []
-  }
   constructor(props) {
     super(props)
+    this.state = {
+      items: []
+    }
     api.portfolioThumbnail()
       .then(res => this.setState({items: res}))
   }

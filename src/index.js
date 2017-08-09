@@ -13,7 +13,8 @@ import '../node_modules/typicons.font/src/font/typicons.css'
 const Root = styled.div`
   width: 100%;
   height: 100%;
-  position: absolute;
+  position: fixed;
+  overflow: scroll;
   background-color: #eeeeee;
 `
 
@@ -34,17 +35,21 @@ const Helper = styled.div`
   }
 `
 
+const PageContainer = styled.div`
+  padding: 0 100px;
+`
+
 render(
   <Root>
     <Helper className='container'>
       <Container>
         <BrowserRouter>
-          <div>
+          <PageContainer>
             <Route path='/' component={NavBar} />
             <Route exact path='/' component={HomePage} />
             <Route exact path='/portfolio' component={Portfolio} />
             <Route exact path='/about' component={About} />
-          </div>
+          </PageContainer>
         </BrowserRouter>
       </Container>
     </Helper>
