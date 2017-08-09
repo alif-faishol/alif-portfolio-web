@@ -11,7 +11,7 @@ export default props => {
     <Container className='row'>
       {props.items.map(index => {
         return (
-          <Item className='col-xs-4'
+          <Item className='col-lg-4 col-sm-6'
             key={index.id}
             thumbnail={index.img}
             title={index.title}
