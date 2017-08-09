@@ -40,19 +40,23 @@ const PageContainer = styled.div`
 `
 
 render(
-  <Root>
-    <Helper className='container'>
-      <Container>
-        <BrowserRouter>
+  <BrowserRouter>
+    <Root>
+      <Helper className='container'>
+        <Route path='/'>
+          <Container style={{position: 'fixed', zIndex: '99'}}>
+            <NavBar/>
+          </Container>
+        </Route>
+        <Container>
           <PageContainer>
-            <Route path='/' component={NavBar} />
             <Route exact path='/' component={HomePage} />
             <Route exact path='/portfolio' component={Portfolio} />
             <Route exact path='/about' component={About} />
           </PageContainer>
-        </BrowserRouter>
-      </Container>
-    </Helper>
-  </Root>, document.getElementById('root'))
+        </Container>
+      </Helper>
+    </Root>
+  </BrowserRouter>, document.getElementById('root'))
 
 registerServiceWorker()
