@@ -5,12 +5,10 @@ import SquareBox from '../../common/styling/SquareBox'
 const Content = styled.div`
   background-image: url('${props => props.thumbnail}');
   background-size: contain;
+  background-position: center;
   position: relative;
   box-shadow: 0 0 8px 1px #cccccc;
   transition: all 0.2s;
-  &:hover {
-    box-shadow: 0 0 8px 4px #cccccc;
-  }
   background-repeat: no-repeat;
   height: 100%;
 `
@@ -21,20 +19,24 @@ const Description = styled.div`
   visibility: hidden;
   height: 100%;
   transition: all 0.2s;
-  ${Content}:hover & {
-    background-color: rgba(255, 255, 255, 0.8);
-    visibility: visible;
-  }
+`
+
+const Title = styled.div`
+  font-family: 'Cairo', sans-serif;
+  position: relative; 
+  height: 50px;
 `
 
 export default props => {
   return (
     <SquareBox className={props.className} style={{marginBottom: '30px'}}>
+      <Title>
+        {props.title}
+      </Title>
       <Content thumbnail={props.thumbnail}>
         <Description>
           {props.content}
         </Description>
-        {props.title}
       </Content>
     </SquareBox>
   )
