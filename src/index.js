@@ -10,11 +10,10 @@ import About from './components/About'
 import registerServiceWorker from './registerServiceWorker'
 import '../node_modules/typicons.font/src/font/typicons.css'
 
-const Root = styled.div`
+const Background = styled.div`
   width: 100%;
   height: 100%;
   position: fixed;
-  overflow: scroll;
   background-color: #eeeeee;
 `
 
@@ -41,7 +40,8 @@ const PageContainer = styled.div`
 
 render(
   <BrowserRouter>
-    <Root>
+    <div>
+      <Background/>
       <Helper className='container'>
         <Route path='/'>
           <Container style={{position: 'fixed', zIndex: '99'}}>
@@ -56,7 +56,7 @@ render(
           </PageContainer>
         </Container>
       </Helper>
-    </Root>
+    </div>
   </BrowserRouter>, document.getElementById('root'))
 
 registerServiceWorker()

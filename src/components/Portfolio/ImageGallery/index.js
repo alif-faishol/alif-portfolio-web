@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Item from './Item'
 
 const Container = styled.div`
+  padding-bottom: 50px;
 `
 
 export default props => {
