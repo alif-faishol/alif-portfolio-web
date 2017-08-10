@@ -17,6 +17,7 @@ export default props => {
               key={index.id}
               thumbnail={index.img}
               title={index.title}
+              content={index.content}
             />
           )
         })}

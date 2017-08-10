@@ -10,7 +10,8 @@ const portfolioThumbnail = () => {
         return {
           id: index.id,
           img: apiRoot + index.images.data[0].url,
-          title: index.title
+          title: index.title,
+          content: index.content
         }
       })
     })

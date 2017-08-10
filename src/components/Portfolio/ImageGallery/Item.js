@@ -5,9 +5,9 @@ import SquareBox from '../../common/styling/SquareBox'
 const Content = styled.div`
   background-image: url('${props => props.thumbnail}');
   background-size: contain;
+  position: relative;
   box-shadow: 0 0 8px 1px #cccccc;
   transition: all 0.2s;
-  padding: 10%;
   &:hover {
     box-shadow: 0 0 8px 4px #cccccc;
   }
@@ -15,20 +15,25 @@ const Content = styled.div`
   height: 100%;
 `
 
+const Description = styled.div`
+  position: absolute;
+  width: 100%;
+  visibility: hidden;
+  height: 100%;
+  transition: all 0.2s;
+  ${Content}:hover & {
+    background-color: rgba(255, 255, 255, 0.8);
+    visibility: visible;
+  }
+`
+
 export default props => {
-  const thumbnail = (
-    props.thumbnail ?
-    props.thumbnail :
-    ''
-  )
-  const className = (
-    props.className ?
-    props.className :
-    ''
-  )
   return (
-    <SquareBox className={className}>
-      <Content thumbnail={thumbnail}>
+    <SquareBox className={props.className} style={{marginBottom: '30px'}}>
+      <Content thumbnail={props.thumbnail}>
+        <Description>
+          {props.content}
+        </Description>
         {props.title}
       </Content>
     </SquareBox>
