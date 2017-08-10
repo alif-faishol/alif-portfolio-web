@@ -17,6 +17,7 @@ const StyledLink = styled(NavLink)`
     color: white;
   }
   -webkit-font-smoothing: antialiased;
+  -mox-osx-font-smoothing: grayscale;
   display: block;
   font-family: 'Cairo', sans-serif;
   div:first-child {

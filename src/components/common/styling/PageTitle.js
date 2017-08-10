@@ -3,10 +3,10 @@ import styled from 'styled-components'
 
 const Title = styled.div`
   font-family: 'Cairo', sans-serif;
-  padding-top: 45px;
-  padding-bottom: 50px;
+  padding-top: 40px;
+  padding-bottom: 30px;
   h1 {
-    font-size: 2.5em;
+    font-size: 3em;
   }
 `
 

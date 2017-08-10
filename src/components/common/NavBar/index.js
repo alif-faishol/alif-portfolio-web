@@ -6,7 +6,6 @@ const Container = styled.nav`
   position: absolute;
   background-color: #242c36;
   top: 20px;
-  color: blue;
   width: 50px;
   left: 0;
   box-shadow: 3px 3px 8px rgba(171, 171, 171, 0.5);
@@ -16,26 +15,27 @@ const Container = styled.nav`
   }
 `
 
-
 export default () => {
   return (
-    <Container>
-      <Item
-        exact
-        to='/'
-        icon='home'
-        value='Homepage'
-      />
-      <Item
-        to='/portfolio'
-        icon='star'
-        value='Portfolio'
-      />
-      <Item
-        to='/about'
-        icon='info-large'
-        value='About'
-      />
-    </Container>
+    <div>
+      <Container>
+        <Item
+          exact
+          to='/'
+          icon='home'
+          value='Homepage'
+        />
+        <Item
+          to='/portfolio'
+          icon='star'
+          value='Portfolio'
+        />
+        <Item
+          to='/about'
+          icon='info-large'
+          value='About'
+        />
+      </Container>
+    </div>
   )
 }

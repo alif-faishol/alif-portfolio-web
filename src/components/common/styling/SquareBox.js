@@ -20,7 +20,7 @@ export default props => {
     height: 100%;
   `
   return (
-    <Container style={props.style} className={props.className}>
+    <Container {...props}>
       <Square>
         {props.children}
       </Square>

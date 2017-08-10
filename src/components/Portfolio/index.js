@@ -1,7 +1,7 @@
 import React from 'react'
 import api from '../../api'
 import ImageGallery from './ImageGallery'
-import PageTitle from '../common/PageTitle'
+import PageTitle from '../common/styling/PageTitle'
 
 class Portfolio extends React.Component {
   constructor(props) {
