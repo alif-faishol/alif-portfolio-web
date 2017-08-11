@@ -37,18 +37,16 @@ const PageContainer = styled.div`
 render(
   <BrowserRouter>
     <div className='container'>
-        <Route path='/'>
-          <Container style={{position: 'fixed', zIndex: '99'}}>
-            <NavBar/>
-          </Container>
-        </Route>
-        <Container>
-          <PageContainer>
-            <Route exact path='/' component={HomePage} />
-            <Route exact path='/portfolio' component={Portfolio} />
-            <Route exact path='/about' component={About} />
-          </PageContainer>
-        </Container>
+      <Container style={{position: 'fixed', zIndex: '99'}}>
+        <NavBar/>
+      </Container>
+      <Container>
+        <PageContainer>
+          <Route exact path='/' component={HomePage} />
+          <Route exact path='/portfolio' component={Portfolio} />
+          <Route exact path='/about' component={About} />
+        </PageContainer>
+      </Container>
     </div>
   </BrowserRouter>, document.getElementById('root'))
 
