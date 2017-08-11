@@ -25,13 +25,12 @@ const Container = styled.div`
 
 const PageContainer = styled.div`
   padding: 0 100px;
-  @media (max-width: 767px) and (min-width: 530px) {
-    width: 500px;
+  @media (max-width: 767px) and (min-width: 600px) {
+    width: 550px;
     margin: auto;
   }
-  @media (max-width: 529px) {
+  @media (max-width: 599px) {
     padding: 0 10%;
-    width: initial;
   }
 `
 
