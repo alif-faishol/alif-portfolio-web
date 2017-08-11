@@ -7,7 +7,7 @@ const Content = styled.div`
   background-size: contain;
   background-position: center;
   position: relative;
-  box-shadow: 0 0 8px 1px #cccccc;
+  border: 3px solid #eeeeee;
   transition: all 0.2s;
   background-repeat: no-repeat;
   height: 100%;
