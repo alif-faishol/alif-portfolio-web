@@ -2,7 +2,7 @@ import React from 'react'
 import {render} from 'react-dom'
 import {BrowserRouter, Route} from 'react-router-dom'
 import './bootstrap.min.css'
-import styled from 'styled-components'
+import styled, {injectGlobal} from 'styled-components'
 import NavBar from './components/common/NavBar'
 import HomePage from './components/HomePage'
 import Portfolio from './components/Portfolio'
@@ -10,12 +10,7 @@ import About from './components/About'
 import registerServiceWorker from './registerServiceWorker'
 import '../node_modules/typicons.font/src/font/typicons.css'
 
-const Background = styled.div`
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  background-color: #eeeeee;
-`
+injectGlobal(["@import url('https://fonts.googleapis.com/css?family=Cairo:200,400,600');"])
 
 const Container = styled.div`
   position: relative;
@@ -28,21 +23,21 @@ const Container = styled.div`
   background-color: white;
 `
 
-const Helper = styled.div`
-  @media (max-width: 767px) {
-    background-color: white;
-  }
-`
-
 const PageContainer = styled.div`
   padding: 0 100px;
+  @media (max-width: 767px) and (min-width: 530px) {
+    width: 500px;
+    margin: auto;
+  }
+  @media (max-width: 529px) {
+    padding: 0 10%;
+    width: initial;
+  }
 `
 
 render(
   <BrowserRouter>
-    <div>
-      <Background/>
-      <Helper className='container'>
+    <div className='container'>
         <Route path='/'>
           <Container style={{position: 'fixed', zIndex: '99'}}>
             <NavBar/>
@@ -55,7 +50,6 @@ render(
             <Route exact path='/about' component={About} />
           </PageContainer>
         </Container>
-      </Helper>
     </div>
   </BrowserRouter>, document.getElementById('root'))
 

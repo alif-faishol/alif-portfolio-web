@@ -7,6 +7,9 @@ const Title = styled.div`
   padding-bottom: 30px;
   h1 {
     font-size: 3em;
+    color: #242c36;
+    font-weight: 300;
+    text-shadow: 1px 1px 4px #cccccc;
   }
 `
 

@@ -1,8 +1,6 @@
 import React from 'react'
-import styled, {injectGlobal} from 'styled-components'
+import styled from 'styled-components'
 import {NavLink} from 'react-router-dom'
-
-injectGlobal(["@import url('https://fonts.googleapis.com/css?family=Cairo');"])
 
 const StyledLink = styled(NavLink)`
   position: relative;
@@ -16,10 +14,9 @@ const StyledLink = styled(NavLink)`
     text-decoration: none;
     color: white;
   }
-  -webkit-font-smoothing: antialiased;
-  -mox-osx-font-smoothing: grayscale;
   display: block;
   font-family: 'Cairo', sans-serif;
+  font-weight: 200;
   div:first-child {
     margin: 0;
     position: absolute;

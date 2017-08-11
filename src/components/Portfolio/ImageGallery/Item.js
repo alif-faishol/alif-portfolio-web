@@ -23,13 +23,16 @@ const Description = styled.div`
 
 const Title = styled.div`
   font-family: 'Cairo', sans-serif;
+  color: #333333;
+  font-size: 1.1em;
+  font-weight: 600;
   position: relative; 
-  height: 50px;
+  padding-bottom: 15px;
 `
 
 export default props => {
   return (
-    <SquareBox className={props.className} style={{marginBottom: '30px'}}>
+    <SquareBox className={props.className} style={{marginBottom: '80px'}}>
       <Title>
         {props.title}
       </Title>
