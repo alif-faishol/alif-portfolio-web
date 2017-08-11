@@ -4,7 +4,6 @@ import {NavLink} from 'react-router-dom'
 
 const StyledLink = styled(NavLink)`
   position: relative;
-  display: table;
   height: 50px;
   font-size: 20px;
   background-color: inherit;
@@ -17,14 +16,17 @@ const StyledLink = styled(NavLink)`
   display: block;
   font-family: 'Cairo', sans-serif;
   font-weight: 200;
-  div:first-child {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin-right: -50%;
+  @media (max-width: 992px) {
   }
+`
+
+const Icon = styled.div`
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-right: -50%;
 `
 
 const LinkDesc = styled.div`
@@ -53,12 +55,23 @@ const LinkDesc = styled.div`
     opacity: 1;
     left: 50px;
   }
+  @media (max-width: 991px) {
+    transition: none;
+    visibility: visible;
+    opacity: 1;
+    box-shadow: initial;
+    left: 50px;
+    p {
+      display: block;
+      width: 150px;
+    }
+  }
 `
 
 export default props => {
   return (
     <StyledLink {...props} activeStyle={{backgroundColor: '#0099ff'}}>
-      <div><span className={'typcn typcn-' + props.icon}></span></div>
+      <Icon><span className={'typcn typcn-' + props.icon}></span></Icon>
       <LinkDesc><p>{props.value}</p></LinkDesc>
     </StyledLink>
   )
