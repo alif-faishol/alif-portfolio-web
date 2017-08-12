@@ -20,12 +20,15 @@ const Loading = props => {
         margin: 0;
         font-weight: 700;
         font-size: 3em;
+        @media (max-width: 767px) {
+          font-size: 1.8em;
+        }
         color: #cccccc;
         font-family: 'Cairo' sans-serif;
         margin-right: -50%;
         display: block;
         top: 50%;
-        left: 50%;
+        left: ${props => props.error ? '50%' : '45%'};
         transform: translate(-50%, -50%);
         span {
           position: absolute;
@@ -44,7 +47,14 @@ const Loading = props => {
     }, 500)
   return (
     <StyledDiv>
-      <div><p>Fetching data from API<span ref={ref => this.APILoadingText = ref}></span></p></div>
+      <div>
+        {props.error ?
+            <p>Can't connect to the API server</p> : 
+            <p>Fetching data from API
+              <span ref={ref => this.APILoadingText = ref}></span>
+            </p>
+        }
+      </div>
     </StyledDiv>
   )
 }
@@ -65,7 +75,7 @@ export default props => {
           )
         })}
       </div>
-      ) : <Loading/>}
+      ) : <Loading error={props.error}/>}
     </Container>
   )
 }

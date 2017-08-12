@@ -11,14 +11,19 @@ class Portfolio extends React.Component {
       error: false
     }
     api.portfolioThumbnail()
-      .then(res => this.setState({items: res}))
+      .then(res => Array.isArray(res)
+        ? this.setState({items: res})
+        : this.setState({error: true}))
       .catch(err => this.setState({error: true}))
   }
   render() {
     return (
       <div>
         <PageTitle title='Portfolio' />
-        <ImageGallery items={this.state.items} /> 
+        <ImageGallery
+          items={this.state.items}
+          error={this.state.error}
+        /> 
       </div>
     )
   }
