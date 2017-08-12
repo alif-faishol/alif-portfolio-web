@@ -3,22 +3,10 @@ import styled from 'styled-components'
 import SquareBox from '../../common/styling/SquareBox'
 
 const Content = styled.div`
-  background-image: url('${props => props.thumbnail}');
-  background-size: contain;
-  background-position: center;
   position: relative;
   border: 3px solid #eeeeee;
   transition: all 0.2s;
-  background-repeat: no-repeat;
   height: 100%;
-`
-
-const Description = styled.div`
-  position: absolute;
-  width: 100%;
-  visibility: hidden;
-  height: 100%;
-  transition: all 0.2s;
 `
 
 const Title = styled.div`
@@ -30,17 +18,40 @@ const Title = styled.div`
   padding-bottom: 15px;
 `
 
-export default props => {
-  return (
-    <SquareBox className={props.className} style={{marginBottom: '80px'}}>
-      <Title>
-        {props.title}
-      </Title>
-      <Content thumbnail={props.thumbnail}>
-        <Description>
-          {props.content}
-        </Description>
-      </Content>
-    </SquareBox>
-  )
+export default class extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isLoading: true
+    }
+  }
+  loaded = () => {
+    this.setState({
+      isLoading: false
+    })
+  }
+  render() {
+    return (
+      <SquareBox className={this.props.className} style={{marginBottom: '80px'}}>
+        <Title>
+          {this.props.title}
+        </Title>
+        <Content thumbnail={this.props.thumbnail}>
+          <div style={{display: this.state.isLoading ? 'block' : 'none'}}>
+            Loading
+          </div>
+          <img
+            style={{
+              visibility: this.state.isLoading ? 'hidden' : 'visible',
+              height: '100%',
+              width: '100%'
+            }}
+            src={this.props.thumbnail}
+            alt="Thumbnail"
+            onLoad={this.state.isLoading ? this.loaded.bind(this) : null}
+          />
+        </Content>
+      </SquareBox>
+    )
+  }
 }
