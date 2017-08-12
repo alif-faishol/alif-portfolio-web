@@ -7,10 +7,12 @@ class Portfolio extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      items: []
+      items: [],
+      error: false
     }
     api.portfolioThumbnail()
       .then(res => this.setState({items: res}))
+      .catch(err => this.setState({error: true}))
   }
   render() {
     return (
