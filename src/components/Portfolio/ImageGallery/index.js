@@ -10,7 +10,7 @@ const Loading = props => {
   const StyledDiv = styled.div`
     background-color: white;
     width: 100%;
-    height: 300px;
+    height: ${window.innerHeight - 250}px;
     div {
       position: relative;
       width: 100%;
@@ -33,7 +33,7 @@ const Loading = props => {
       }
     }
   `
-  const LoadingAniInv = window.setInterval(
+  const LoadingAniInv = setInterval(
     () => {
       const dot = this.APILoadingText
       dot
@@ -41,7 +41,7 @@ const Loading = props => {
           ? dot.innerHTML += '.'
           : dot.innerHTML = '')
         : clearInterval(LoadingAniInv)
-    }, 200)
+    }, 500)
   return (
     <StyledDiv>
       <div><p>Fetching data from API<span ref={ref => this.APILoadingText = ref}></span></p></div>
