@@ -10,30 +10,41 @@ const Loading = props => {
   const StyledDiv = styled.div`
     background-color: white;
     width: 100%;
-    height: 500px;
-  div {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    p {
-      position: absolute;
-      margin: 0;
-      font-weight: 700;
-      font-size: 3em;
-      color: #cccccc;
-      font-family: 'Cairo' sans-serif;
-      margin-right: -50%;
-      display: block;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-  }
-  }
+    height: 300px;
+    div {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      p {
+        position: absolute;
+        margin: 0;
+        font-weight: 700;
+        font-size: 3em;
+        color: #cccccc;
+        font-family: 'Cairo' sans-serif;
+        margin-right: -50%;
+        display: block;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        span {
+          position: absolute;
+        }
+      }
+    }
   `
-  var dot = ''
+  const LoadingAniInv = window.setInterval(
+    () => {
+      const dot = this.APILoadingText
+      dot
+        ? (dot.innerHTML.length < 3
+          ? dot.innerHTML += '.'
+          : dot.innerHTML = '')
+        : clearInterval(LoadingAniInv)
+    }, 200)
   return (
     <StyledDiv>
-      <div><p>Fetching data from API</p></div>
+      <div><p>Fetching data from API<span ref={ref => this.APILoadingText = ref}></span></p></div>
     </StyledDiv>
   )
 }
