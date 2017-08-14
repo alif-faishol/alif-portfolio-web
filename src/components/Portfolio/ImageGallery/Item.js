@@ -19,12 +19,21 @@ const Title = styled.div`
 `
 
 const Loading = styled.div`
-  display: ${props => props.isLoading ? 'block' : 'none'};
-  position: relative;
+  position: absolute;
   width: 100%;
   height: 100%;
   background-color: #eeeeee;
   color: #777777;
+  opacity: 0;
+  animation: 0.5s 1 ${props => props.isLoading ? 'FadeIn' : 'FadeOut'} forwards;
+  @keyframes FadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes FadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
   div {
     position: absolute;
     margin: 0;
@@ -34,6 +43,28 @@ const Loading = styled.div`
     left: 50%;
     text-align: center;
     transform: translate(-50%, -50%);
+    span {
+      display: block;
+      animation: 2s infinite rotate linear;
+      @keyframes rotate {
+        0% {
+        }
+        45% {
+          transform: rotate(0deg);
+        }
+        50% {
+          transform: rotate(15deg);
+        }
+        55% {
+          transform: rotate(-15deg);
+        }
+        60% {
+          transform: rotate(0deg);
+        }
+        100% {
+        }
+      }
+    }
     p {
       font-weight: 600;
       font-size: 20px;
@@ -42,14 +73,9 @@ const Loading = styled.div`
 `
 
 const StyledImg = styled.img`
-  display: ${props => props.isLoading ? 'none' : 'block'};
   height: 100%;
   width: 100%;
-  animation: 1s 1 FadeIn;
-  @keyframes FadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
+  position: absolute;
 `
 
 export default class extends React.Component {
@@ -78,7 +104,14 @@ export default class extends React.Component {
         <Title>
           {this.props.title}
         </Title>
-        <Content thumbnail={this.props.thumbnail}>
+        <Content>
+          <StyledImg
+            isLoading={this.state.isLoading}
+            src={this.props.thumbnail}
+            alt="Thumbnail"
+            onLoad={this.state.isLoading ? this.loaded : null}
+            onError={this.state.isFailed ? null : this.failed}
+          />
           <Loading isLoading={this.state.isLoading}>
             <div>
               <span className=
@@ -95,13 +128,6 @@ export default class extends React.Component {
               </p>
             </div>
           </Loading>
-          <StyledImg
-            isLoading={this.state.isLoading}
-            src={this.props.thumbnail}
-            alt="Thumbnail"
-            onLoad={this.state.isLoading ? this.loaded : null}
-            onError={this.state.isFailed ? null : this.failed}
-          />
         </Content>
       </SquareBox>
     )
