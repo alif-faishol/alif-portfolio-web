@@ -6,6 +6,7 @@ const Content = styled.div`
   position: relative;
   border: 3px solid #eeeeee;
   transition: all 0.2s;
+  overflow: hidden;
   height: 100%;
 `
 
@@ -19,20 +20,21 @@ const Title = styled.div`
 `
 
 const Loading = styled.div`
-  position: absolute;
+  position: relative;
   width: 100%;
   height: 100%;
   background-color: #eeeeee;
   color: #777777;
   opacity: 0;
-  animation: 0.5s 1 ${props => props.isLoading ? 'FadeIn' : 'FadeOut'} forwards;
+  animation: 0.7s 1 ${props => props.isLoading ? 'FadeIn' : 'FadeOut'} forwards;
   @keyframes FadeIn {
-    from { opacity: 0; }
+    from { opacity: 1; }
     to { opacity: 1; }
   }
   @keyframes FadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
+    0% { top: 0px; opacity: 1; }
+    25% { top: 0%; }
+    100% { top: -100%; opacity: 1; }
   }
   div {
     position: absolute;
@@ -45,7 +47,7 @@ const Loading = styled.div`
     transform: translate(-50%, -50%);
     span {
       display: block;
-      animation: 2s infinite rotate linear;
+      ${props => props.isFailed ? '' : 'animation: 2s infinite rotate linear;'}
       @keyframes rotate {
         0% {
         }
@@ -83,7 +85,8 @@ export default class extends React.Component {
     super(props)
     this.state = {
       isLoading: true,
-      isFailed: false
+      isFailed: false,
+      showLoadAni: true
     }
     this.loaded = this.loaded.bind(this)
     this.failed = this.failed.bind(this)
@@ -92,6 +95,7 @@ export default class extends React.Component {
     this.setState({
       isLoading: false
     })
+    setTimeout(() => this.setState({showLoadAni: false}), 1000)
   }
   failed = () => {
     this.setState({
@@ -112,22 +116,27 @@ export default class extends React.Component {
             onLoad={this.state.isLoading ? this.loaded : null}
             onError={this.state.isFailed ? null : this.failed}
           />
-          <Loading isLoading={this.state.isLoading}>
-            <div>
-              <span className=
-                {this.state.isFailed
-                    ? 'typcn typcn-times'
-                    : 'typcn typcn-watch'
-                }>
-              </span>
-              <p>
-                {this.state.isFailed
-                    ? 'Can\'t Load Image'
-                    : 'Loading Image'
-                }
-              </p>
-            </div>
-          </Loading>
+          {
+            this.state.showLoadAni ?
+              <Loading
+                isLoading={this.state.isLoading}
+                isFailed={this.state.isFailed}>
+                <div>
+                  <span className=
+                    {this.state.isFailed
+                        ? 'typcn typcn-times'
+                        : 'typcn typcn-watch'
+                    }>
+                  </span>
+                  <p>
+                    {this.state.isFailed
+                        ? 'Can\'t Load Image'
+                        : 'Loading Image'
+                    }
+                  </p>
+                </div>
+              </Loading> : null
+          }
         </Content>
       </SquareBox>
     )
