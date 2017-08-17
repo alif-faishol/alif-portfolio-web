@@ -1,8 +1,9 @@
 import React from 'react'
-import {render} from 'react-dom'
-import {BrowserRouter, Route} from 'react-router-dom'
+import {render} from 'react-snapshot'
+import {HashRouter, Route} from 'react-router-dom'
 import './bootstrap.min.css'
 import styled, {injectGlobal} from 'styled-components'
+import {Helmet} from 'react-helmet'
 import NavBar from './components/common/NavBar'
 import HomePage from './components/HomePage'
 import Portfolio from './components/Portfolio'
@@ -35,8 +36,17 @@ const PageContainer = styled.div`
 `
 
 render(
-  <BrowserRouter>
+  <HashRouter>
     <div className='container'>
+      <Helmet>
+        <meta property="og:title" content="Homepage of Alif's Website" />
+        <meta property="og:description" content="Here lies some of Alif's works, and possibly there will some article." />
+        <meta property="og:image" content="/thumbnail.png" />
+        <meta property="og:url" content="https://alif-faishol.github.io/" />
+        <meta name="twitter:card" content="/thumbnail.png" />
+        <meta property="og:site_name" content="Alif's Portfolio Website" />
+        <meta name="twitter:image:alt" content="Logo of Alif Faishol" />
+      </Helmet>
       <Container style={{position: 'fixed', zIndex: '99'}}>
         <NavBar/>
       </Container>
@@ -48,6 +58,6 @@ render(
         </PageContainer>
       </Container>
     </div>
-  </BrowserRouter>, document.getElementById('root'))
+  </HashRouter>, document.getElementById('root'))
 
 registerServiceWorker()

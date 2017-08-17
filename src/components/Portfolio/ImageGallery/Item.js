@@ -76,7 +76,6 @@ const Loading = styled.div`
 
 const StyledImg = styled.img`
   height: 100%;
-  width: 100%;
   position: absolute;
 `
 

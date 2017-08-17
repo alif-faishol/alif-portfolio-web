@@ -3,7 +3,7 @@ import {get} from 'axios'
 export const apiRoot = 'https://directusapi.alifaishol-test.tk'
 const api = props => get(apiRoot + '/api/1.1/' + props).then(res => res.data)
 
-const portfolioThumbnail = () => {
+const portfolioThumbnail = ({sort,offset,limit} = {sort: 'ASC', offset: 0, limit: 200}) => {
   return api('tables/portfolio/rows')
     .then(res => {
       return res.data.map(index => {
