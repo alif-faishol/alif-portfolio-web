@@ -1,9 +1,8 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 import api from '../../api'
 import ImageGallery from './ImageGallery'
 import PageTitle from '../common/styling/PageTitle'
-
+import Paginator from '../common/Paginator'
 
 class Portfolio extends React.Component {
   constructor(props) {
@@ -39,12 +38,11 @@ class Portfolio extends React.Component {
           items={this.state.items}
           error={this.state.error}
         /> 
-        <div>
-          <Link to='/portfolio'>a</Link> 
-          <Link to='/portfolio/page/1'>a</Link> 
-          <Link to='/portfolio/page/2'>a</Link> 
-          <Link to='/portfolio/page/3'>a</Link> 
-        </div>
+        <Paginator
+          pages={this.state.totalPages}
+          baseUrl='/portfolio/page/'
+          active={this.state.page}
+        />
       </div>
     )
   }
