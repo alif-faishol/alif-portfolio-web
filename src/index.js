@@ -54,6 +54,7 @@ render(
         <PageContainer>
           <Route exact path='/' component={HomePage} />
           <Route exact path='/portfolio' component={Portfolio} />
+          <Route path='/portfolio/page/:page' component={Portfolio} />
           <Route exact path='/about' component={About} />
         </PageContainer>
       </Container>

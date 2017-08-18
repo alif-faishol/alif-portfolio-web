@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import SquareBox from '../../common/styling/SquareBox'
+import {Motion, spring, presets} from 'react-motion'
 
 const Content = styled.div`
   position: relative;
   border: 3px solid #eeeeee;
-  transition: all 0.2s;
   overflow: hidden;
   height: 100%;
 `
@@ -25,17 +25,6 @@ const Loading = styled.div`
   height: 100%;
   background-color: #eeeeee;
   color: #777777;
-  opacity: 0;
-  animation: 0.7s 1 ${props => props.isLoading ? 'FadeIn' : 'FadeOut'} forwards;
-  @keyframes FadeIn {
-    from { opacity: 1; }
-    to { opacity: 1; }
-  }
-  @keyframes FadeOut {
-    0% { top: 0px; opacity: 1; }
-    25% { top: 0%; }
-    100% { top: -100%; opacity: 1; }
-  }
   div {
     position: absolute;
     margin: 0;
@@ -85,16 +74,20 @@ export default class extends React.Component {
     this.state = {
       isLoading: true,
       isFailed: false,
-      showLoadAni: true
+      ani: {
+        loadingAni: 0
+      }
     }
     this.loaded = this.loaded.bind(this)
     this.failed = this.failed.bind(this)
   }
   loaded = () => {
     this.setState({
-      isLoading: false
+      isLoading: false,
+      ani: {
+        loadingAni: 100
+      }
     })
-    setTimeout(() => this.setState({showLoadAni: false}), 1000)
   }
   failed = () => {
     this.setState({
@@ -115,27 +108,32 @@ export default class extends React.Component {
             onLoad={this.state.isLoading ? this.loaded : null}
             onError={this.state.isFailed ? null : this.failed}
           />
-          {
-            this.state.showLoadAni ?
-              <Loading
-                isLoading={this.state.isLoading}
-                isFailed={this.state.isFailed}>
-                <div>
-                  <span className=
-                    {this.state.isFailed
-                        ? 'typcn typcn-times'
-                        : 'typcn typcn-watch'
-                    }>
-                  </span>
-                  <p>
-                    {this.state.isFailed
-                        ? 'Can\'t Load Image'
-                        : 'Loading Image'
-                    }
-                  </p>
-                </div>
-              </Loading> : null
-          }
+          <Motion defaultStyle={{y: 0}} style={{y: spring(this.state.ani.loadingAni, {precision: 10})}} >
+            {intStyle =>
+                intStyle.y !== 100 ?
+                  <Loading
+                    isLoading={this.state.isLoading}
+                    isFailed={this.state.isFailed}
+                    style={{
+                      bottom: intStyle.y.toString() + '%'
+                    }}>
+                    <div>
+                      <span className=
+                        {this.state.isFailed
+                            ? 'typcn typcn-times'
+                            : 'typcn typcn-watch'
+                        }>
+                      </span>
+                      <p>
+                        {this.state.isFailed
+                            ? 'Can\'t Load Image'
+                            : 'Loading Image'
+                        }
+                      </p>
+                    </div>
+                  </Loading> : null
+            }
+          </Motion>
         </Content>
       </SquareBox>
     )
