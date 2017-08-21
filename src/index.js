@@ -1,6 +1,6 @@
 import React from 'react'
 import {render} from 'react-snapshot'
-import {HashRouter, Route} from 'react-router-dom'
+import {BrowserRouter, Route} from 'react-router-dom'
 import './bootstrap.min.css'
 import styled, {injectGlobal} from 'styled-components'
 import {Helmet} from 'react-helmet'
@@ -36,11 +36,11 @@ const PageContainer = styled.div`
 `
 
 render(
-  <HashRouter>
+  <BrowserRouter>
     <div className='container'>
       <Helmet>
         <meta property="og:title" content="Homepage of Alif's Website" />
-        <meta property="og:description" content="Here lies some of Alif's works, and possibly there will some article." />
+        <meta property="og:description" content="Here lies some of Alif's works, and possibly there will be some article." />
         <meta property="og:image" content="/thumbnail.png" />
         <meta property="og:url" content="https://alif-faishol.github.io/" />
         <meta name="twitter:card" content="/thumbnail.png" />
@@ -54,11 +54,10 @@ render(
         <PageContainer>
           <Route exact path='/' component={HomePage} />
           <Route exact path='/portfolio' component={Portfolio} />
-          <Route path='/portfolio/page/:page' component={Portfolio} />
           <Route exact path='/about' component={About} />
         </PageContainer>
       </Container>
     </div>
-  </HashRouter>, document.getElementById('root'))
+  </BrowserRouter>, document.getElementById('root'))
 
 registerServiceWorker()

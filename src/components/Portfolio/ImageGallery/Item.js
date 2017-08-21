@@ -1,30 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
 import SquareBox from '../../common/styling/SquareBox'
-import {Motion, spring, presets} from 'react-motion'
+import {Motion, spring} from 'react-motion'
 
 const Content = styled.div`
   position: relative;
-  border: 3px solid #eeeeee;
   overflow: hidden;
   height: 100%;
-`
-
-const Title = styled.div`
-  font-family: 'Cairo', sans-serif;
-  color: #333333;
-  font-size: 1.1em;
-  font-weight: 600;
-  position: relative; 
-  padding-bottom: 15px;
+  border: 1px solid #cccccc;
 `
 
 const Loading = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: #eeeeee;
-  color: #777777;
+  background-color: #e9ecec;
+  color: #666666;
   div {
     position: absolute;
     margin: 0;
@@ -58,7 +49,8 @@ const Loading = styled.div`
     }
     p {
       font-weight: 600;
-      font-size: 20px;
+      font-size: 25px;
+      font-family: 'Cairo', sans-serif;
     } 
   }
 `
@@ -81,7 +73,12 @@ export default class extends React.Component {
     this.loaded = this.loaded.bind(this)
     this.failed = this.failed.bind(this)
   }
-  loaded = () => {
+  shouldComponentUpdate(p,s) {
+    return s.isLoading === this.state.isLoading
+      ? false
+      : true
+  }
+  loaded() {
     this.setState({
       isLoading: false,
       ani: {
@@ -89,22 +86,19 @@ export default class extends React.Component {
       }
     })
   }
-  failed = () => {
+  failed() {
     this.setState({
       isFailed: true
     })
   }
   render() {
     return (
-      <SquareBox className={this.props.className} style={{marginBottom: '80px'}}>
-        <Title>
-          {this.props.title}
-        </Title>
+      <SquareBox className={this.props.className} style={{marginBottom: '30px'}}>
         <Content>
           <StyledImg
-            isLoading={this.state.isLoading}
             src={this.props.thumbnail}
             alt="Thumbnail"
+            onClick={this.props.itemDetailsHandler}
             onLoad={this.state.isLoading ? this.loaded : null}
             onError={this.state.isFailed ? null : this.failed}
           />

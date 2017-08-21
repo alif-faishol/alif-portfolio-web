@@ -32,26 +32,27 @@ const Loading = props => {
         transform: translate(-50%, -50%);
         span {
           position: absolute;
+          &:after {
+            content: '...';
+            animation: 3s infinite dot linear;
+            @keyframes dot {
+              0% { content: '' }
+              33% { content: '.' }
+              66% { content: '..' }
+              100% { content: '...' }
+            }
+          }
         }
       }
     }
   `
-  const LoadingAniInv = setInterval(
-    () => {
-      const dot = this.APILoadingText
-      dot
-        ? (dot.innerHTML.length < 3
-          ? dot.innerHTML += '.'
-          : dot.innerHTML = '')
-        : clearInterval(LoadingAniInv)
-    }, 500)
   return (
     <StyledDiv>
       <div>
         {props.error ?
             <p>Can't connect to the API server</p> : 
             <p>Fetching data from API
-              <span ref={ref => this.APILoadingText = ref}></span>
+              <span></span>
             </p>
         }
       </div>
@@ -62,20 +63,22 @@ const Loading = props => {
 export default props => {
   return (
     <Container>
-      {props.items[0] ? (
       <div className='row'>
-        {props.items.map(index => {
-          return (
-            <Item className='col-lg-4 col-sm-6'
-              key={index.id}
-              thumbnail={index.img}
-              title={index.title}
-              content={index.content}
-            />
-          )
-        })}
+        {props.items[0]
+            ? props.items.map(item => {
+              return (
+                <Item className='col-lg-4 col-sm-6'
+                  key={item.id}
+                  thumbnail={item.img}
+                  title={item.title}
+                  content={item.content}
+                  itemDetailsHandler={props.itemDetailsHandler}
+                />
+              )
+            })
+            : <Loading error={props.error}/>
+        }
       </div>
-      ) : <Loading error={props.error}/>}
     </Container>
   )
 }
