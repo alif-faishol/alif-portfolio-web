@@ -1,5 +1,5 @@
 import React from 'react'
-import api from '../../api'
+import {portfolioThumbnail} from '../../api'
 import ImageGallery from './ImageGallery'
 import ItemDetails from './ImageGallery/ItemDetails'
 import PageTitle from '../common/styling/PageTitle'
@@ -15,15 +15,17 @@ class Portfolio extends React.Component {
       error: false,
       totalPages: 1,
       redirect: false,
-      itemDetails: {status: false, data: undefined},
+      itemDetails: {status: false, id: undefined},
       page: props.location.hash.match(/\d+/) || 1
     }
     this.getItems = this.getItems.bind(this)
     this.itemDetailsHandler = this.itemDetailsHandler.bind(this)
+  }
+  componentDidMount() {
     this.getItems()
   }
   getItems(page=this.state.page,limit=6) {
-    api.portfolioThumbnail({page,limit})
+    portfolioThumbnail({page,limit})
       .then(res => {
         if (page > res.meta.totalPages) {
           this.setState({redirect: true})
@@ -41,11 +43,12 @@ class Portfolio extends React.Component {
     })
     this.getItems(nextProps.location.hash.match(/\d+/)) 
   }
-  itemDetailsHandler(data) {
+  itemDetailsHandler(id) {
+    id = Number.isInteger(id) ? id : 1
     if (this.state.itemDetails.status === false) {
-      this.setState({itemDetails: {status: true, data: data}})
+      this.setState({itemDetails: {status: true, id: id}})
     } else {
-      this.setState({itemDetails: {status: false, data: undefined}})
+      this.setState({itemDetails: {status: false, id: undefined}})
     }
   }
   render() {
@@ -56,7 +59,7 @@ class Portfolio extends React.Component {
             : null
         }
         {this.state.itemDetails.status
-            ? <ItemDetails itemDetailsHandler={this.itemDetailsHandler} data={this.state.itemDetails.data} />
+            ? <ItemDetails itemDetailsHandler={this.itemDetailsHandler} id={this.state.itemDetails.id} />
             : null
         }
         <Helmet>

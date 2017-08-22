@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import api from '../../../api'
+import {Motion, spring} from 'react-motion'
+import {portfolioItemDetails} from '../../../api'
 
 const Container = styled.div`
   z-index: 101;
@@ -13,11 +14,21 @@ const Container = styled.div`
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
   text-align: center;
-  overflow: scroll;
+  overflow-y: scroll;
+  animation: 0.2s 1 fadeIn;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 
 const ContentContainer = styled.div`
-  padding: 50px;
+  padding: 50px 0;
+  height: 100%;
   &:before {
     content: '';
     display: inline-block;
@@ -28,42 +39,80 @@ const ContentContainer = styled.div`
 `
 
 const Content = styled.div`
-  background-color: white;
-  width: 400px;
   vertical-align: middle;
+  position: relative;
   display: inline-block;
-  font-size: 50px;
+  font-size: 1.2em;
+  overflow: hidden;
+  @media (max-width: 767px) {
+    background-color: white;
+    width: 100%;
+  }
+  h3 {
+    margin-top: 0;
+    text-align: left;
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.3em;
+  }
+  p {
+    margin-top: 20px;
+    text-align: left;
+    font-family: 'Cairo', sans-serif;
+  }
 `
 
 export default class extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      detailsData : {},
+      detailsData : undefined,
       isLoading: true,
       isError: false
     }
     this.getDetails = this.getDetails.bind(this)
   }
-  componentWillMount() {
+  componentDidMount() {
     document.body.style.overflow = 'hidden'
+    this.getDetails(this.props.id)
   }
   componentWillUnmount() {
     document.body.style.overflow = 'initial'
   }
-  getDetails(id) {
-    api
+  getDetails(itemId) {
+    portfolioItemDetails(itemId)
+      .then(res => {
+        this.setState({detailsData: res})
+      })
   }
   render() {
     return (
-      <Container onClick={this.props.itemDetailsHandler}>
+      <Container style={this.props.style} onClick={this.props.itemDetailsHandler}>
         <ContentContainer>
-          <Content onClick={event => event.stopPropagation()}>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-            tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
-            vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-            no sea takimata sanctus est Lorem ipsum dolor sit amet.
-          </Content>
+          <Motion defaultStyle={{t: -50}} style={{t: spring(0,{stiffness: 300, damping: 15})}}>
+            {intStyle => {
+              return (
+                <Content style={{top: intStyle.t.toString() + 'px'}} onClick={event => event.stopPropagation()}>
+                  <div className='container' style={{backgroundColor: 'white'}}>
+                    {this.state.detailsData
+                      ? <div className='row'>
+                        <div className='col-md-6'>
+                          {this.state.detailsData.images.map(item => {
+                            return (<img key={item.id} src={item.url} alt="Big" width='100%'/>)
+                          })}
+                        </div>
+                        <div className='col-md-6' style={{padding: '50px'}}>
+                          <h3>{this.state.detailsData.title}</h3>
+                          <hr/>
+                          <p>{this.state.detailsData.content}</p>
+                        </div>
+                      </div>
+                      : null
+                    }
+                  </div>
+                </Content>
+              )
+            }}
+          </Motion>
         </ContentContainer>
       </Container>
     )

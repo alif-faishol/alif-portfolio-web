@@ -69,6 +69,7 @@ export default props => {
               return (
                 <Item className='col-lg-4 col-sm-6'
                   key={item.id}
+                  id={item.id}
                   thumbnail={item.img}
                   title={item.title}
                   content={item.content}

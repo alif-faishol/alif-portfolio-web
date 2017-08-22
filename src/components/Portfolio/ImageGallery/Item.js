@@ -98,7 +98,7 @@ export default class extends React.Component {
           <StyledImg
             src={this.props.thumbnail}
             alt="Thumbnail"
-            onClick={this.props.itemDetailsHandler}
+            onClick={() => this.props.itemDetailsHandler(this.props.id)}
             onLoad={this.state.isLoading ? this.loaded : null}
             onError={this.state.isFailed ? null : this.failed}
           />
