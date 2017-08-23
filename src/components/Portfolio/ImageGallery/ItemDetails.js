@@ -81,38 +81,45 @@ export default class extends React.Component {
   getDetails(itemId) {
     portfolioItemDetails(itemId)
       .then(res => {
-        this.setState({detailsData: res})
+        this.setState({isLoading: false, detailsData: res})
       })
   }
   render() {
     return (
       <Container style={this.props.style} onClick={this.props.itemDetailsHandler}>
         <ContentContainer>
-          <Motion defaultStyle={{t: -50}} style={{t: spring(0,{stiffness: 300, damping: 15})}}>
-            {intStyle => {
-              return (
-                <Content style={{top: intStyle.t.toString() + 'px'}} onClick={event => event.stopPropagation()}>
-                  <div className='container' style={{backgroundColor: 'white'}}>
-                    {this.state.detailsData
-                      ? <div className='row'>
-                        <div className='col-md-6'>
-                          {this.state.detailsData.images.map(item => {
-                            return (<img key={item.id} src={item.url} alt="Big" width='100%'/>)
-                          })}
-                        </div>
-                        <div className='col-md-6' style={{padding: '50px'}}>
-                          <h3>{this.state.detailsData.title}</h3>
-                          <hr/>
-                          <p>{this.state.detailsData.content}</p>
+          {this.state.isLoading
+              ? null
+              :
+              <Motion
+                defaultStyle={{t: -50}}
+                style={{t: spring(0,{stiffness: 300, damping: 15})}}
+              >
+                {intStyle => {
+                  return (
+                    <Content
+                      style={{top: intStyle.t.toString() + 'px'}}
+                      onClick={event => event.stopPropagation()}
+                    >
+                      <div className='container' style={{backgroundColor: 'white'}}>
+                        <div className='row'>
+                          <div className='col-md-6'>
+                            {this.state.detailsData.images.map(item => {
+                              return (<img key={item.id} src={item.url} alt="Big" width='100%'/>)
+                            })}
+                          </div>
+                          <div className='col-md-6' style={{padding: '50px'}}>
+                            <h3>{this.state.detailsData.title}</h3>
+                            <hr/>
+                            <p>{this.state.detailsData.content}</p>
+                          </div>
                         </div>
                       </div>
-                      : null
-                    }
-                  </div>
-                </Content>
-              )
-            }}
-          </Motion>
+                    </Content>
+                  )
+                }}
+              </Motion>
+          }
         </ContentContainer>
       </Container>
     )
