@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import {Motion, spring} from 'react-motion'
-import {portfolioItemDetails} from '../../../api'
+import {portfolioItemDetails} from '../../../../api'
+import ImgSlider from './ImgSlider'
 
 const Container = styled.div`
   z-index: 101;
@@ -28,7 +29,6 @@ const Container = styled.div`
 
 const ContentContainer = styled.div`
   padding: 50px 0;
-  height: 100%;
   &:before {
     content: '';
     display: inline-block;
@@ -44,9 +44,14 @@ const Content = styled.div`
   display: inline-block;
   font-size: 1.2em;
   overflow: hidden;
-  @media (max-width: 767px) {
+  @media (max-width: 500px) {
     background-color: white;
     width: 100%;
+  }
+  div.container {
+    @media (max-width: 991px) {
+      max-width: 500px;
+    }
   }
   h3 {
     margin-top: 0;
@@ -103,7 +108,8 @@ export default class extends React.Component {
                     >
                       <div className='container' style={{backgroundColor: 'white'}}>
                         <div className='row'>
-                          <div className='col-md-6'>
+                          <div className='col-md-6' style={{padding: '0'}}>
+                            <ImgSlider images={this.state.detailsData.images}></ImgSlider>
                             {this.state.detailsData.images.map(item => {
                               return (<img key={item.id} src={item.url} alt="Big" width='100%'/>)
                             })}

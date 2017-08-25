@@ -98,13 +98,13 @@ export default class extends React.Component {
           <StyledImg
             src={this.props.thumbnail}
             alt="Thumbnail"
-            onClick={() => this.props.itemDetailsHandler(this.props.id)}
             onLoad={this.state.isLoading ? this.loaded : null}
             onError={this.state.isFailed ? null : this.failed}
+            onClick={this.props.itemDetailsHandler}
           />
           <Motion defaultStyle={{y: 0}} style={{y: spring(this.state.ani.loadingAni, {precision: 10})}} >
             {intStyle =>
-                intStyle.y !== 100 ?
+                intStyle.y !== 100 && 
                   <Loading
                     isLoading={this.state.isLoading}
                     isFailed={this.state.isFailed}
@@ -125,7 +125,7 @@ export default class extends React.Component {
                         }
                       </p>
                     </div>
-                  </Loading> : null
+                  </Loading>
             }
           </Motion>
         </Content>

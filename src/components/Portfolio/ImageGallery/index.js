@@ -65,7 +65,7 @@ export default props => {
     <Container>
       <div className='row'>
         {props.items[0]
-            ? props.items.map(item => {
+            ? props.items.map((item, i) => {
               return (
                 <Item className='col-lg-4 col-sm-6'
                   key={item.id}
@@ -73,7 +73,7 @@ export default props => {
                   thumbnail={item.img}
                   title={item.title}
                   content={item.content}
-                  itemDetailsHandler={props.itemDetailsHandler}
+                  itemDetailsHandler={() => props.itemDetailsHandler(i)}
                 />
               )
             })

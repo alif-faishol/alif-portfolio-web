@@ -43,8 +43,8 @@ class Portfolio extends React.Component {
     })
     this.getItems(nextProps.location.hash.match(/\d+/)) 
   }
-  itemDetailsHandler(id) {
-    id = Number.isInteger(id) ? id : 1
+  itemDetailsHandler(sort) {
+    const id = Number.isInteger(sort) ? this.state.items[sort].id : 1
     if (this.state.itemDetails.status === false) {
       this.setState({itemDetails: {status: true, id: id}})
     } else {
