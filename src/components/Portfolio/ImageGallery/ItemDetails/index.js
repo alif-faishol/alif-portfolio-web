@@ -89,6 +89,12 @@ export default class extends React.Component {
         this.setState({isLoading: false, detailsData: res})
       })
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.id !== this.props.id) {
+      this.setState({isLoading: true, detailsData: undefined})
+      this.getDetails(nextProps.id)
+    }
+  }
   render() {
     return (
       <Container style={this.props.style} onClick={this.props.itemDetailsHandler}>
@@ -118,6 +124,16 @@ export default class extends React.Component {
                             <h3>{this.state.detailsData.title}</h3>
                             <hr/>
                             <p>{this.state.detailsData.content}</p>
+                            <a
+                              onClick={(e) => {
+                                this.props.itemDetailsPrev(this.props.sort)
+                              }}
+                            >prev</a>
+                            <a
+                              onClick={(e) => {
+                                this.props.itemDetailsNext(this.props.sort)
+                              }}
+                            >next</a>
                           </div>
                         </div>
                       </div>
