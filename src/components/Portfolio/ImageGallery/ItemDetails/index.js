@@ -28,7 +28,8 @@ const Container = styled.div`
 `
 
 const ContentContainer = styled.div`
-  padding: 50px 0;
+  text-align: center;
+  height: 100%;
   &:before {
     content: '';
     display: inline-block;
@@ -39,6 +40,7 @@ const ContentContainer = styled.div`
 `
 
 const Content = styled.div`
+  padding: 50px 0;
   vertical-align: middle;
   position: relative;
   display: inline-block;
