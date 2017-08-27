@@ -53,7 +53,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js && react-snapshot",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "deploy": "yarn build && ./deploy.sh alif-faishol/alif-faishol.github.io"
   },
   "jest": {
     "collectCoverageFrom": [

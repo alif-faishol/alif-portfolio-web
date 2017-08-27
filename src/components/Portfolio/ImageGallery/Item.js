@@ -57,6 +57,7 @@ const Loading = styled.div`
 
 const StyledImg = styled.img`
   height: 100%;
+  cursor: pointer;
   position: absolute;
 `
 

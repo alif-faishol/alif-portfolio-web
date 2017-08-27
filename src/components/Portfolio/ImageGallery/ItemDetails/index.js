@@ -47,7 +47,6 @@ const Content = styled.div`
   font-size: 1.2em;
   overflow: hidden;
   @media (max-width: 500px) {
-    background-color: white;
     width: 100%;
   }
   div.container {
@@ -105,16 +104,19 @@ export default class extends React.Component {
               ? null
               :
               <Motion
-                defaultStyle={{t: -50}}
-                style={{t: spring(0,{stiffness: 300, damping: 15})}}
+                defaultStyle={{t: -50, o: 0}}
+                style={{t: spring(0,{stiffness: 300, damping: 15}), o: spring(100)}}
               >
                 {intStyle => {
                   return (
                     <Content
-                      style={{top: intStyle.t.toString() + 'px'}}
-                      onClick={event => event.stopPropagation()}
+                      style={{top: intStyle.t.toString() + 'px', opacity: intStyle.o/100}}
                     >
-                      <div className='container' style={{backgroundColor: 'white'}}>
+                      <div
+                        className='container'
+                        style={{backgroundColor: 'white'}}
+                        onClick={event => event.stopPropagation()}
+                      >
                         <div className='row'>
                           <div className='col-md-6' style={{padding: '0'}}>
                             <ImgSlider images={this.state.detailsData.images}></ImgSlider>
