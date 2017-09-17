@@ -2,6 +2,15 @@ import React from 'react'
 import {Motion, spring} from 'react-motion'
 import SquareBox from '../../../common/styling/SquareBox'
 import Centered from '../../../common/styling/Centered'
+import styled from 'styled-components'
+
+const ImgNav = styled.div`
+  &:hover span {
+    visibility: visible !important;
+    opacity: 1 !important;
+    transition: all 0.2s;
+  }
+`
 
 export default class extends React.Component {
   constructor(props) {
@@ -48,7 +57,7 @@ export default class extends React.Component {
               height: '100%'
             }}
           >
-            <div
+            <ImgNav
               style={{
                 position: 'absolute',
                 zIndex: 2,
@@ -81,6 +90,8 @@ export default class extends React.Component {
                             marginLeft: '10%',
                             textShadow: '0 0 5px white',
                             color: '#333333',
+                            visibility: 'hidden',
+                            opacity: '0',
                             fontSize: '180%'
                           }}
                           className="typcn typcn-chevron-left"
@@ -114,6 +125,8 @@ export default class extends React.Component {
                             marginRight: '10%',
                             textShadow: '0 0 5px white',
                             color: '#333333',
+                            visibility: 'hidden',
+                            opacity: '0',
                             fontSize: '180%'
                           }}
                           className="typcn typcn-chevron-right"
@@ -122,7 +135,7 @@ export default class extends React.Component {
                   }
                 </Centered>
               </div>
-            </div>
+            </ImgNav>
             <Motion
               defaultStyle={{x: (this.img.offsetWidth * this.state.activeImg)*(-1) + this.state.pos.x}}
               style={{x: spring(
@@ -164,6 +177,6 @@ export default class extends React.Component {
           </Centered>
         </SquareBox>
       </div>
-    )
-  }
-}
+      )
+      }
+      }
