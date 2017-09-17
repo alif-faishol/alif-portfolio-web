@@ -148,6 +148,8 @@ class Portfolio extends React.Component {
         </Helmet>
         <PageTitle title='Portfolio' />
         <ImageGallery
+          currentPage={this.state.page}
+          itemPerPage={this.state.data.itemPerPage}
           items={
             (() => {
               let start = (this.state.page-1)*this.state.data.itemPerPage,

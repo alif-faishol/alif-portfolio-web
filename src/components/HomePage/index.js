@@ -1,5 +1,6 @@
 import React from 'react'
 import PageTitle from '../common/styling/PageTitle'
+import {Link} from 'react-router-dom'
 
 class HomePage extends React.Component {
   state = {
@@ -9,7 +10,7 @@ class HomePage extends React.Component {
     return (
       <div>
         <PageTitle title='Homepage' />
-        {/*<div dangerouslySetInnerHTML={{ __html: this.state.api }}></div>*/}
+      <Link to='portfolio' style={{fontSize: '25px'}}>Go to porfolio</Link>
       </div>
     )
   }
