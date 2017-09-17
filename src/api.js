@@ -3,15 +3,10 @@ import {get} from 'axios'
 export const apiRoot = 'https://directusapi.alifaishol-test.tk'
 const api = props => get(apiRoot + '/api/1.1/' + props).then(res => res.data)
 
-export const portfolioThumbnail = ({sort,page,limit} = {sort: ['id', 'ASC'], page: 1, limit: 200}) => {
-  const offset = limit * page - limit
+export const portfolioThumbnail = ({sort,offset,limit} = {sort: ['id', 'ASC'], offset: 0, limit: 200}) => {
   return api('tables/portfolio/rows?limit=' + limit + '&offset=' + offset)
     .then(res => {
-      return {
-        meta: {
-          totalPages: Math.ceil(res.meta.Published / (limit ? limit : 0))
-        },
-        data: res.data.map(index => {
+      return res.data.map(index => {
         return {
           id: index.id,
           img: apiRoot + index.images.data[0].url,
@@ -19,7 +14,6 @@ export const portfolioThumbnail = ({sort,page,limit} = {sort: ['id', 'ASC'], pag
           content: index.content
         }
       })
-      }
     })
     .catch(err => console.log(err))
 }

@@ -21,7 +21,9 @@ export default class extends React.Component {
     this.mouseMoveHandler = this.mouseMoveHandler.bind(this)
     this.touchMoveHandler = this.touchMoveHandler.bind(this)
     this.touchDownHandler = this.touchDownHandler.bind(this)
+
     this.activeImgChanger = this.activeImgChanger.bind(this)
+    this.resized = this.resized.bind(this)
   }
   mouseDownHandler(e) {
     this.initialPosX = e.pageX
@@ -29,7 +31,10 @@ export default class extends React.Component {
   }
   mouseEnterHandler(e) {
     e.buttons === 1
-      && (() => this.drag = true)()
+      && (() => {
+        this.initialPosX = e.pageX
+        this.drag = true
+      })()
   }
   touchDownHandler(e) {
     this.initialPosX = e.touches[0].screenX
@@ -38,9 +43,8 @@ export default class extends React.Component {
   mouseUpHandler(xPos) {
     this.initialPosX = 0
     this.touchOk = false
-    this.drag = false
     this.setState({pos: {x: 0, w: 100}})
-    xPos > (this.img.offsetWidth/3)
+    xPos > (this.img.offsetWidth/4)
       ?
       (() => {
         this.activeImgChanger(false)
@@ -55,12 +59,12 @@ export default class extends React.Component {
           return true
         })()
       )
+    this.drag = false
   }
   mouseMoveHandler(e) {
     let xPos = e.pageX-this.initialPosX
-    return this.moveHandler(e.buttons === 1, xPos)
-      ? undefined
-      : this.mouseUpHandler()
+    return this.moveHandler(e.buttons === 1, xPos) === false
+      && this.drag && this.mouseUpHandler()
   }
   touchMoveHandler(e) {
     let good = () => {
@@ -76,11 +80,14 @@ export default class extends React.Component {
       input
       ? 
       (() => {
-        this.setState({
-          pos: {
-            x: xPos/0.5
-          }
-        })
+        (this.state.activeImg !== this.props.images.length-1 || xPos > 0)
+          && (this.state.activeImg !== 0 || xPos < 0)
+          &&
+          this.setState({
+            pos: {
+              x: xPos/1.0
+            }
+          })
         return true
       })()
       : false
@@ -96,6 +103,15 @@ export default class extends React.Component {
         this.state.activeImg !== 0
         && this.setState({activeImg: this.state.activeImg-1})
       )
+  }
+  resized() {
+    this.setState({})
+  }
+  componentDidMount() {
+    window.addEventListener('resize',this.resized)
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize',this.resized)
   }
   render() {
     return (
@@ -114,31 +130,103 @@ export default class extends React.Component {
                   onMouseUp: e => this.mouseUpHandler(e.pageX-this.initialPosX),
                   onMouseMove: this.mouseMoveHandler,
                   onMouseEnter: this.mouseEnterHandler,
+                  onMouseLeave: this.mouseUpHandler,
                   onTouchStart: this.touchDownHandler,
                   onTouchEnd: e => this.mouseUpHandler(this.state.pos.x),
                   onTouchMove: this.touchMoveHandler
                 }
             }
           >
-            {this.props.images.length>1 &&
-                <div
-                  style={{position: 'absolute', zIndex: 1}}
-                  onClick={e => {
-                    this.setState({activeImg: 1})
+            <div
+              style={{
+                position: 'absolute',
+                zIndex: 2,
+                width: '100%',
+                height: '100%'
+              }}
+            >
+              <div
+                style={{
+                  height: '100%',
+                  width: '50%',
+                  display: 'inline-block'
+                }}
+                {...this.state.activeImg !== 0
+                    && {
+                      onClick: e => this.setState({activeImg: this.state.activeImg-1})
+                    }
+                }
+              >
+                <Centered
+                  style={{
+                    width: '100%',
+                    textAlign: 'left'
                   }}
-                ></div>
-            }
+                >
+                  {this.state.activeImg !== 0
+                      && (
+                        <span
+                          style={{
+                            marginLeft: '10%',
+                            textShadow: '0 0 5px white',
+                            color: '#333333',
+                            fontSize: '180%'
+                          }}
+                          className="typcn typcn-chevron-left"
+                        />
+                      )
+                  }
+                </Centered>
+              </div>
+              <div
+                style={{
+                  height: '100%',
+                  width: '50%',
+                  display: 'inline-block'
+                }}
+                {...this.state.activeImg !== this.props.images.length-1
+                    && {
+                      onClick: e => this.setState({activeImg: this.state.activeImg+1})
+                    }
+                }
+              >
+                <Centered
+                  style={{
+                    width: '100%',
+                    textAlign: 'right'
+                  }}
+                >
+                  {this.state.activeImg !== this.props.images.length-1
+                      && (
+                        <span
+                          style={{
+                            marginRight: '10%',
+                            textShadow: '0 0 5px white',
+                            color: '#333333',
+                            fontSize: '180%'
+                          }}
+                          className="typcn typcn-chevron-right"
+                        />
+                      )
+                  }
+                </Centered>
+              </div>
+            </div>
             <Motion
               defaultStyle={{x: (this.img.offsetWidth * this.state.activeImg)*(-1) + this.state.pos.x}}
-              style={{x: spring( (this.img.offsetWidth * this.state.activeImg)*(-1) + this.state.pos.x,{precision: 1,stiffness: 150, damping: 25})}}>
+              style={{x: spring(
+                (this.img.offsetWidth * this.state.activeImg)*(-1)
+                + this.state.pos.x,{precision: 1,stiffness: 150, damping: 25}
+              )}}
+            >
               {intStyle => {
                 return (
                   <div
-                      draggable="false"
-                      style={{
-                        position: 'relative',
-                        left: intStyle.x.toString() + 'px'
-                      }}
+                    draggable="false"
+                    style={{
+                      position: 'relative',
+                      left: intStyle.x.toString() + 'px'
+                    }}
                   >
                     {
                       this.props.images.map((item, i) => {
@@ -148,7 +236,8 @@ export default class extends React.Component {
                             key={item.id}
                             draggable="false"
                             style={{
-                              display: 'inline-block'
+                              display: 'inline-block',
+                              userSelect: 'none'
                             }}
                             src={item.url}
                             alt="Big"

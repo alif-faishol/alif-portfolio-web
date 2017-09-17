@@ -2,10 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import Item from './Item'
 
-const Container = styled.div`
-  padding-bottom: 50px;
-`
-
 const Loading = props => {
   const StyledDiv = styled.div`
     background-color: white;
@@ -62,7 +58,7 @@ const Loading = props => {
 
 export default props => {
   return (
-    <Container>
+    <div>
       <div className='row'>
         {props.items[0]
             ? props.items.map((item, i) => {
@@ -80,6 +76,6 @@ export default props => {
             : <Loading error={props.error}/>
         }
       </div>
-    </Container>
+    </div>
   )
 }
