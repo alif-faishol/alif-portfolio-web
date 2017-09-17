@@ -7,7 +7,13 @@ const Content = styled.div`
   position: relative;
   overflow: hidden;
   height: 100%;
-  border: 1px solid #cccccc;
+  border: 1px solid transparent;
+  &:hover {
+    border: 5px solid transparent;
+    transition: all 0.2s;
+  }
+`
+const Container = styled.div`
 `
 
 const Loading = styled.div`
@@ -57,6 +63,7 @@ const Loading = styled.div`
 
 const StyledImg = styled.img`
   height: 100%;
+  width: 100%;
   cursor: pointer;
   position: absolute;
 `
@@ -94,43 +101,51 @@ export default class extends React.Component {
   }
   render() {
     return (
-      <SquareBox className={this.props.className} style={{marginBottom: '30px'}}>
-        <Content>
-          <StyledImg
-            src={this.props.thumbnail}
-            alt="Thumbnail"
-            onLoad={this.state.isLoading ? this.loaded : null}
-            onError={this.state.isFailed ? null : this.failed}
-            onClick={this.props.itemDetailsHandler}
-          />
-          <Motion defaultStyle={{y: 0}} style={{y: spring(this.state.ani.loadingAni, {precision: 10})}} >
-            {intStyle =>
-                intStyle.y !== 100 && 
-                  <Loading
-                    isLoading={this.state.isLoading}
-                    isFailed={this.state.isFailed}
-                    style={{
-                      bottom: intStyle.y.toString() + '%'
-                    }}>
-                    <div>
-                      <span className=
-                        {this.state.isFailed
-                            ? 'typcn typcn-times'
-                            : 'typcn typcn-watch'
-                        }>
-                      </span>
-                      <p>
-                        {this.state.isFailed
-                            ? 'Can\'t Load Image'
-                            : 'Loading Image'
-                        }
-                      </p>
-                    </div>
-                  </Loading>
-            }
-          </Motion>
-        </Content>
-      </SquareBox>
+      <Container className={this.props.className} style={{marginBottom: '30px'}}>
+        <div style={{overflow: 'hidden', textOverflow: 'ellipsis', paddingBottom: '8px'}}>
+          <span style={{whiteSpace: 'nowrap', fontSize: '16px'}}>
+            { this.props.title }
+          </span>
+        </div>
+        <SquareBox style={{marginBottom: '10px'}}>
+          <Content>
+            <StyledImg
+              src={this.props.thumbnail}
+              alt="Thumbnail"
+              onLoad={this.state.isLoading ? this.loaded : null}
+              onError={this.state.isFailed ? null : this.failed}
+              onClick={this.props.itemDetailsHandler}
+              style={{border: '1px solid #cccccc'}}
+            />
+            <Motion defaultStyle={{y: 0}} style={{y: spring(this.state.ani.loadingAni, {precision: 10})}} >
+              {intStyle =>
+                  intStyle.y !== 100 && 
+                    <Loading
+                      isLoading={this.state.isLoading}
+                      isFailed={this.state.isFailed}
+                      style={{
+                        bottom: intStyle.y.toString() + '%'
+                      }}>
+                      <div>
+                        <span className=
+                          {this.state.isFailed
+                              ? 'typcn typcn-times'
+                              : 'typcn typcn-watch'
+                          }>
+                        </span>
+                        <p>
+                          {this.state.isFailed
+                              ? 'Can\'t Load Image'
+                              : 'Loading Image'
+                          }
+                        </p>
+                      </div>
+                    </Loading>
+              }
+            </Motion>
+          </Content>
+        </SquareBox>
+      </Container>
     )
   }
 }

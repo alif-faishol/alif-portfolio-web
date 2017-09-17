@@ -11,8 +11,6 @@ export default class extends React.Component {
       totalImg: props.images.length,
       pos: {x: 0, w: 100}
     }
-    this.initialPosX = 0
-    this.touchOk = false
     this.img = {offsetWidth: 0}
 
     this.activeImgChanger = this.activeImgChanger.bind(this)

@@ -22,6 +22,7 @@ const Container = styled.div`
     margin: 0 50px;
   }
   background-color: white;
+  font-family: 'Cairo', sans-serif;
 `
 
 const PageContainer = styled.div`
