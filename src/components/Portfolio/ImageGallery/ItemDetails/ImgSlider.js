@@ -15,83 +15,8 @@ export default class extends React.Component {
     this.touchOk = false
     this.img = {offsetWidth: 0}
 
-    this.mouseDownHandler = this.mouseDownHandler.bind(this)
-    this.mouseEnterHandler = this.mouseEnterHandler.bind(this)
-    this.mouseUpHandler = this.mouseUpHandler.bind(this)
-    this.mouseMoveHandler = this.mouseMoveHandler.bind(this)
-    this.touchMoveHandler = this.touchMoveHandler.bind(this)
-    this.touchDownHandler = this.touchDownHandler.bind(this)
-
     this.activeImgChanger = this.activeImgChanger.bind(this)
     this.resized = this.resized.bind(this)
-  }
-  mouseDownHandler(e) {
-    this.initialPosX = e.pageX
-    this.drag = true
-  }
-  mouseEnterHandler(e) {
-    e.buttons === 1
-      && (() => {
-        this.initialPosX = e.pageX
-        this.drag = true
-      })()
-  }
-  touchDownHandler(e) {
-    this.initialPosX = e.touches[0].screenX
-    this.drag = true
-  }
-  mouseUpHandler(xPos) {
-    this.initialPosX = 0
-    this.touchOk = false
-    this.setState({pos: {x: 0, w: 100}})
-    xPos > (this.img.offsetWidth/4)
-      ?
-      (() => {
-        this.activeImgChanger(false)
-      })()
-      : (
-        (() => {
-          xPos*(-1) > (this.img.offsetWidth/3)
-            &&
-            (() => {
-              this.activeImgChanger(true)
-            })()
-          return true
-        })()
-      )
-    this.drag = false
-  }
-  mouseMoveHandler(e) {
-    let xPos = e.pageX-this.initialPosX
-    return this.moveHandler(e.buttons === 1, xPos) === false
-      && this.drag && this.mouseUpHandler()
-  }
-  touchMoveHandler(e) {
-    let good = () => {
-      this.touchOk = true
-      return true
-    }
-    let xPos = e.touches[0].screenX-this.initialPosX
-    this.moveHandler(this.touchOk ? true : Math.abs(xPos) > 30 && good(), xPos)
-  }
-  moveHandler(input, xPos) {
-    return (
-      this.drag &&
-      input
-      ? 
-      (() => {
-        (this.state.activeImg !== this.props.images.length-1 || xPos > 0)
-          && (this.state.activeImg !== 0 || xPos < 0)
-          &&
-          this.setState({
-            pos: {
-              x: xPos/1.0
-            }
-          })
-        return true
-      })()
-      : false
-    )
   }
   activeImgChanger(x) {
     return x
@@ -124,18 +49,6 @@ export default class extends React.Component {
               width: '100%',
               height: '100%'
             }}
-            {...this.props.images.length>1 &&
-                {
-                  onMouseDown: this.mouseDownHandler,
-                  onMouseUp: e => this.mouseUpHandler(e.pageX-this.initialPosX),
-                  onMouseMove: this.mouseMoveHandler,
-                  onMouseEnter: this.mouseEnterHandler,
-                  onMouseLeave: this.mouseUpHandler,
-                  onTouchStart: this.touchDownHandler,
-                  onTouchEnd: e => this.mouseUpHandler(this.state.pos.x),
-                  onTouchMove: this.touchMoveHandler
-                }
-            }
           >
             <div
               style={{
