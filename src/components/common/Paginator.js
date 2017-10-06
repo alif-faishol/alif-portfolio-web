@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Centered from './styling/Centered'
 
 const StyledDiv = styled.div`
-  margin-bottom: 50px;
+  margin-bottom: 10px;
   text-align: right;
   color: white;
   div:hover a {
@@ -15,13 +15,12 @@ const StyledDiv = styled.div`
     background-color: rgb(0, 153, 255);
   }
   a {
-    position: relative;
-    margin: 0 8px;
     width: 10px;
     height: 10px;
+    position: relative;
     background-color: rgb(153, 153, 153);
     border-radius: 100%;
-    display: inline-block;
+    display: block;
     font-size: 0;
     transition: all 0.2s;
     &.active {
@@ -48,10 +47,10 @@ export default props => {
     arr.push(props.baseUrl + i.toString())
   }
   return (
-    <StyledDiv>
+    <StyledDiv {...props} >
       {arr.map((arr,i) => {
         return (
-          <div key={i+1} style={{display: 'inline-block'}}>
+          <div key={i+1} style={{display: 'inline-block', width: '30px', height: '30px'}}>
             <Centered>
               <Link
                 to={arr}

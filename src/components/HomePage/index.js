@@ -10,7 +10,7 @@ class HomePage extends React.Component {
     return (
       <div>
         <PageTitle title='Homepage' />
-      <Link to='portfolio' style={{fontSize: '25px'}}>Go to porfolio</Link>
+        <Link to='portfolio' style={{fontSize: '25px'}}>Go to porfolio</Link>
       </div>
     )
   }

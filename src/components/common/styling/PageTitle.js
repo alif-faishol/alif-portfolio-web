@@ -15,7 +15,7 @@ const Title = styled.div`
 
 export default (props) => {
   return (
-    <Title>
+    <Title {...props}>
       <h1>{props.title}</h1>
     </Title>
   )

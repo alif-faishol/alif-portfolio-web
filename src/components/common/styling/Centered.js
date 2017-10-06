@@ -17,6 +17,7 @@ const Container = styled.div`
 
 const Centered = styled.div`
   display: inline-block;
+  white-space: initial;
   vertical-align: middle;
   font-size: initial;
 `

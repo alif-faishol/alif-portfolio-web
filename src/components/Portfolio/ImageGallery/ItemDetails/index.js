@@ -17,6 +17,7 @@ const Container = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   text-align: center;
   overflow-y: scroll;
+  overflow-x: hidden;
   animation: 0.2s 1 fadeIn;
   @keyframes fadeIn {
     from {
@@ -35,10 +36,12 @@ const Content = styled.div`
   background-color: transparent;
   padding: 50px 0;
   @media (max-width: 500px) {
-    width: 100%;
+      max-width: 100%;
   }
   div.container {
     background-color: white;
+    width: 100%;
+    white-space: initial;
     @media (max-width: 991px) {
       max-width: 500px;
     }

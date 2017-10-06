@@ -12,6 +12,7 @@ import registerServiceWorker from './registerServiceWorker'
 import '../node_modules/typicons.font/src/font/typicons.css'
 
 injectGlobal(["@import url('https://fonts.googleapis.com/css?family=Cairo:200,400,600');"])
+injectGlobal(["html{height:100%;}"])
 
 const Container = styled.div`
   position: relative;
