@@ -16,7 +16,10 @@ const StyledLink = styled(NavLink)`
   display: block;
   font-family: 'Cairo', sans-serif;
   font-weight: 200;
-  @media (max-width: 992px) {
+  display: block;
+  @media (max-width: 767px) {
+    width: 50px;
+    display: ${props => props.data.showNav ? 'block' : 'none'};
   }
 `
 
@@ -55,15 +58,16 @@ const LinkDesc = styled.div`
     opacity: 1;
     left: 50px;
   }
-  @media (max-width: 991px) {
+  @media (max-width: 767px) {
     transition: none;
+    background-color: initial;
     visibility: visible;
     opacity: 1;
     box-shadow: initial;
     left: 50px;
     p {
       display: block;
-      width: 150px;
+      width: 100%;
     }
   }
 `

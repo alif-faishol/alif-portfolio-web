@@ -148,6 +148,7 @@ export default class extends React.Component {
                   <div
                     draggable="false"
                     style={{
+                      whiteSpace: 'nowrap',
                       position: 'relative',
                       left: intStyle.x.toString() + 'px'
                     }}

@@ -144,7 +144,7 @@ class Portfolio extends React.Component {
               sort={this.state.itemDetails.sort}
             />
         }
-        <div style={{marginBottom: '50px', marginTop: '10px'}} className="row">
+        <div style={{marginBottom: '20px', marginTop: '30px'}} className="row">
           <div className="col-sm-6">
             <span style={{fontSize: '30px'}}>Portfolio</span>
           </div>

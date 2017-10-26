@@ -40,7 +40,6 @@ const Content = styled.div`
   }
   div.container {
     background-color: white;
-    width: 100%;
     white-space: initial;
     @media (max-width: 991px) {
       max-width: 500px;

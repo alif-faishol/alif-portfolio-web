@@ -12,34 +12,16 @@ import registerServiceWorker from './registerServiceWorker'
 import '../node_modules/typicons.font/src/font/typicons.css'
 
 injectGlobal(["@import url('https://fonts.googleapis.com/css?family=Cairo:200,400,600');"])
-injectGlobal(["html{height:100%;}"])
+injectGlobal(["html,html>body,html>body>#root{height:100%;}"])
 
-const Container = styled.div`
-  position: relative;
-  @media (min-width: 1199px) and (max-width: 1280px) {
-    margin: 0 50px;
-  }
-  @media (min-width: 992px) and (max-width: 1080px) {
-    margin: 0 50px;
-  }
+const RootDiv = styled.div`
   background-color: white;
   font-family: 'Cairo', sans-serif;
 `
 
-const PageContainer = styled.div`
-  padding: 0 100px;
-  @media (max-width: 767px) and (min-width: 600px) {
-    width: 550px;
-    margin: auto;
-  }
-  @media (max-width: 599px) {
-    padding: 0 10%;
-  }
-`
-
 render(
   <BrowserRouter>
-    <div className='container-fluid' style={{maxWidth: '1600px'}}>
+    <RootDiv className='container-fluid' style={{height: '100%', minHeight: '500px', maxWidth: '1600px'}}>
       <Helmet>
         <meta property="og:title" content="Homepage of Alif's Website" />
         <meta property="og:description" content="Here lies some of Alif's works, and possibly there will be some article." />
@@ -59,7 +41,7 @@ render(
             <Route exact path='/about' component={About} />
         </div>
       </div>
-    </div>
+    </RootDiv>
   </BrowserRouter>, document.getElementById('root'))
 
 registerServiceWorker()

@@ -102,11 +102,6 @@ export default class extends React.Component {
   render() {
     return (
       <Container className={this.props.className} style={{marginBottom: '30px'}}>
-        <div style={{overflow: 'hidden', textOverflow: 'ellipsis', paddingBottom: '8px'}}>
-          <span style={{whiteSpace: 'nowrap', fontSize: '16px'}}>
-            { this.props.title }
-          </span>
-        </div>
         <SquareBox style={{marginBottom: '10px'}}>
           <Content>
             <StyledImg
