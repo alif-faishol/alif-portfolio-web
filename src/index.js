@@ -39,7 +39,7 @@ const PageContainer = styled.div`
 
 render(
   <BrowserRouter>
-    <div className='container'>
+    <div className='container-fluid' style={{maxWidth: '1600px'}}>
       <Helmet>
         <meta property="og:title" content="Homepage of Alif's Website" />
         <meta property="og:description" content="Here lies some of Alif's works, and possibly there will be some article." />
@@ -49,16 +49,16 @@ render(
         <meta property="og:site_name" content="Alif's Portfolio Website" />
         <meta name="twitter:image:alt" content="Logo of Alif Faishol" />
       </Helmet>
-      <Container style={{position: 'fixed', zIndex: '99'}}>
-        <NavBar/>
-      </Container>
-      <Container>
-        <PageContainer>
-          <Route exact path='/' component={HomePage} />
-          <Route exact path='/portfolio' component={Portfolio} />
-          <Route exact path='/about' component={About} />
-        </PageContainer>
-      </Container>
+      <div className='row'>
+        <div className='col-lg-offset-1 col-md-1 col-sm-2 col-xs-12'>
+          <NavBar/>
+        </div>
+        <div className='col-lg-8 col-md-10 col-sm-8 col-xs-12'>
+            <Route exact path='/' component={HomePage} />
+            <Route exact path='/portfolio' component={Portfolio} />
+            <Route exact path='/about' component={About} />
+        </div>
+      </div>
     </div>
   </BrowserRouter>, document.getElementById('root'))
 
