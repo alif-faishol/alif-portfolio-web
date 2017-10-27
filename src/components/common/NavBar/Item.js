@@ -67,7 +67,6 @@ const LinkDesc = styled.div`
     left: 50px;
     p {
       display: block;
-      width: 100%;
     }
   }
 `

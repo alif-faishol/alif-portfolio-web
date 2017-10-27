@@ -3,13 +3,14 @@ import styled from 'styled-components'
 import Item from './Item'
 
 const Container = styled.div`
-  position: relative;
+  position: absolute;
   z-index: 100;
   width: 100%;
   @media (min-width: 768px) {
     top: 50px;
     width: 50px;
     box-shadow: 0 2px 10px #999999;
+    position: relative;
   }
   background-color: #1a1a1a;
 `
@@ -18,6 +19,7 @@ const Menu = styled.div`
   @media (min-width: 768px) {
     display: none;
   }
+  cursor: pointer;
   height: 50px;
   width: inherit;
   background-color: white;
@@ -29,6 +31,7 @@ const Menu = styled.div`
     width: 50px;
   }
   &>div.icon {
+
   }
   & span {
     position: relative;
@@ -62,7 +65,12 @@ export default class extends React.Component {
         <Menu
           onClick={this.toggleNav}
         >
-          <div className='icon'>
+          <div 
+            style={this.state.showNav ?
+                {backgroundColor: '#1a1a1a', color: 'white'} :
+                {}}
+            className='icon'
+          >
             <span className={'typcn typcn-th-menu'}></span>
           </div>
           <div>

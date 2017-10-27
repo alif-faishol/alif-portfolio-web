@@ -17,6 +17,21 @@ injectGlobal(["html,html>body,html>body>#root{height:100%;}"])
 const RootDiv = styled.div`
   background-color: white;
   font-family: 'Cairo', sans-serif;
+  & #navbar-container {
+    @media (max-width: 767px) {
+      float: none;
+      margin: 0 auto;
+      max-width: 500px;
+      height: 50px;
+    }
+  }
+  & #content-container {
+    @media (max-width: 767px) {
+      float: none;
+      margin: 0 auto;
+      max-width: 500px;
+    }
+  }
 `
 
 render(
@@ -32,13 +47,13 @@ render(
         <meta name="twitter:image:alt" content="Logo of Alif Faishol" />
       </Helmet>
       <div className='row'>
-        <div className='col-lg-offset-1 col-md-1 col-sm-2 col-xs-12'>
+        <div id='navbar-container' className='col-lg-offset-1 col-md-1 col-sm-2 col-xs-12'>
           <NavBar/>
         </div>
-        <div className='col-lg-8 col-md-10 col-sm-8 col-xs-12'>
-            <Route exact path='/' component={HomePage} />
-            <Route exact path='/portfolio' component={Portfolio} />
-            <Route exact path='/about' component={About} />
+        <div id='content-container' className='col-lg-8 col-md-10 col-sm-8 col-xs-12'>
+          <Route exact path='/' component={HomePage} />
+          <Route exact path='/portfolio' component={Portfolio} />
+          <Route exact path='/about' component={About} />
         </div>
       </div>
     </RootDiv>
