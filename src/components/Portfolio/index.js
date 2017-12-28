@@ -31,6 +31,7 @@ class Portfolio extends React.Component {
   getItems() {
     return portfolioThumbnail()
       .then(res => {
+        console.log(res)
         let totalPages = Math.ceil(res.length/this.state.itemPerPage)
         Array.isArray(res)
           ? this.setState({
