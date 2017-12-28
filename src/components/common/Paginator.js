@@ -1,18 +1,33 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
+import Centered from './styling/Centered'
 
 const StyledDiv = styled.div`
-  margin-bottom: 50px;
+  margin-bottom: 10px;
+  text-align: right;
+  color: white;
+  div:hover a {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    color: white;
+    background-color: rgb(0, 153, 255);
+  }
   a {
+    width: 10px;
+    height: 10px;
     position: relative;
-    margin: 0 10px;
-    width: 30px;
-    height: 30px;
-    display: inline-block;
-    border: 1px solid #cccccc;
+    background-color: rgb(153, 153, 153);
+    border-radius: 100%;
+    display: block;
+    font-size: 0;
+    transition: all 0.2s;
     &.active {
-      color: red;
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
+      color: white;
     }
     p {
       margin: 0;
@@ -32,16 +47,19 @@ export default props => {
     arr.push(props.baseUrl + i.toString())
   }
   return (
-    <StyledDiv style={{textAlign: 'center'}}>
+    <StyledDiv {...props} >
       {arr.map((arr,i) => {
         return (
-          <Link
-            key={i+1}
-            to={arr}
-            className={i+1 === props.active ? 'active' : ''}
-          >
-            <p>{i+1}</p>
-          </Link>
+          <div key={i+1} style={{display: 'inline-block', width: '30px', height: '30px'}}>
+            <Centered>
+              <Link
+                to={arr}
+                className={i+1 === props.active ? 'active' : ''}
+              >
+                <p>{i+1}</p>
+              </Link>
+            </Centered>
+          </div>
         )
       })}
     </StyledDiv>

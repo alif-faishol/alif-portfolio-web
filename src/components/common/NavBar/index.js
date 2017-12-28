@@ -2,100 +2,44 @@ import React from 'react'
 import styled from 'styled-components'
 import Item from './Item'
 
-const Container = props => {
-  const StyledDiv = styled.div`
-    @media (max-width: 991px) {
-      position: fixed;
-      display: ${props => props.show ? 'block' : 'none'};
-      left: 20px;
-      top: 20px;
-      overflow: hidden;
-      width: 240px;
-      background-color: #242c36;
-      animation: 0.3s 1 slideIn;
-      @keyframes slideIn {
-        from {
-          height: 50px;
-        }
-        to {
-          height: 200px;
-        }
-      }
-    }
-  `
-  return (
-    <StyledDiv {...props}></StyledDiv>
-  )
-}
-const ItemContainer = styled.nav`
-  position: relative;
-  background-color: #242c36;
-  width: 50px;
-  box-shadow: unset;
-  @media (min-width: 992px) {
-    top: 20px;
-    left: -50px;
-    box-shadow: -4px 3px 8px rgba(171, 171, 171, 0.5);
+const Container = styled.div`
+  position: absolute;
+  z-index: 100;
+  width: 100%;
+  @media (min-width: 768px) {
+    top: 50px;
+    width: 50px;
+    box-shadow: 0 2px 10px #999999;
+    position: fixed;
   }
+  background-color: #1a1a1a;
 `
+
 const Menu = styled.div`
-  @media (min-width: 992px) {
+  @media (min-width: 768px) {
     display: none;
   }
-  position: fixed;
-  top: 20px;
-  left: 20px;
+  cursor: pointer;
   height: 50px;
-  width: 50px;
+  width: inherit;
   background-color: white;
-  border: 1px solid #cccccc;
-  cursor: pointer;
-  span {
-    margin: 0;
-    position: absolute;
-    font-size: 20px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin-right: -50%;
-  }
-`
-const CloseNav = styled.div`
-  @media (min-width: 992px) {
-    display: none;
-  }
-  position: relative;
-  height: 50px;
-  cursor: pointer;
-  width: 50px;
-  font-family: 'Cairo', sans-serif;
-  font-weight: 200;
-  font-size: 25px;
-  border-bottom: 2px solid white;
-  color: white;
-  span {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin-right: -50%;
-  }
-  div {
-    display: table-cell;
-    border-bottom: 2px solid white;
-    vertical-align: middle;
-    position: relative;
+  white-space: nowrap;
+  border-bottom: 1px solid #1a1a1a;
+  &>div {
+    display: inline-block;
     height: 50px;
-    padding: 0 20px;
-    background-color: #242c36;
-    left: 50px;
-    p {
-      margin: 0;
-      font-size: 20px;
-      display: block;
-      width: 150px
-    }
+    width: 50px;
+  }
+  &>div.icon {
+
+  }
+  & span {
+    position: relative;
+    float: left;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
   }
 `
 
@@ -117,35 +61,42 @@ export default class extends React.Component {
   }
   render() {
     return (
-      <div>
-        <Menu onClick={this.toggleNav}>
-          <span className='typcn typcn-th-menu'></span>
+      <Container>
+        <Menu
+          onClick={this.toggleNav}
+        >
+          <div 
+            style={this.state.showNav ?
+                {backgroundColor: '#1a1a1a', color: 'white'} :
+                {}}
+            className='icon'
+          >
+            <span className={'typcn typcn-th-menu'}></span>
+          </div>
+          <div>
+            <span style={{marginLeft: '25px'}}>Menu</span>
+          </div>
         </Menu>
-        <Container show={this.state.showNav}>
-          <ItemContainer>
-            <CloseNav onClick={this.toggleNav}>
-              <span className='typcn typcn-arrow-sorted-up'></span>
-              <div><p>Close</p></div>
-            </CloseNav>
-            <Item
-              exact
-              to='/'
-              icon='home'
-              value='Homepage'
-            />
-            <Item
-              to='/portfolio'
-              icon='star'
-              value='Portfolio'
-            />
-            <Item
-              to='/about'
-              icon='info-large'
-              value='About'
-            />
-          </ItemContainer>
-        </Container>
-      </div>
+        <Item
+          exact
+          to='/'
+          icon='home'
+          value='Homepage'
+          data={{showNav:this.state.showNav}}
+        />
+        <Item
+          to='/portfolio'
+          icon='star'
+          value='Portfolio'
+          data={{showNav:this.state.showNav}}
+        />
+        <Item
+          to='/about'
+          icon='info-large'
+          value='About'
+          data={{showNav:this.state.showNav}}
+        />
+      </Container>
     )
   }
 }

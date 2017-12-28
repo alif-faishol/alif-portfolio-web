@@ -69,7 +69,7 @@ export default props => {
                   thumbnail={item.img}
                   title={item.title}
                   content={item.content}
-                  itemDetailsHandler={() => props.itemDetailsHandler(i)}
+                  itemDetailsHandler={() => props.itemDetailsHandler((props.currentPage-1)*props.itemPerPage+i)}
                 />
               )
             })

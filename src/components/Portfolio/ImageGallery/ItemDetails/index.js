@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import {Motion, spring} from 'react-motion'
 import {portfolioItemDetails} from '../../../../api'
 import ImgSlider from './ImgSlider'
+import Centered from '../../../common/styling/Centered'
 
 const Container = styled.div`
   z-index: 101;
@@ -16,6 +17,7 @@ const Container = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   text-align: center;
   overflow-y: scroll;
+  overflow-x: hidden;
   animation: 0.2s 1 fadeIn;
   @keyframes fadeIn {
     from {
@@ -27,29 +29,18 @@ const Container = styled.div`
   }
 `
 
-const ContentContainer = styled.div`
-  text-align: center;
-  font-size: 0;
-  height: 100%;
-  &:before {
-    content: '';
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-    margin-right: -0.25em;
-  }
-`
-
 const Content = styled.div`
-  padding: 50px 0;
-  vertical-align: middle;
   position: relative;
-  display: inline-block;
-  font-size: initial;
+  height: 90%;
+  min-height: 450px;
+  background-color: transparent;
+  padding: 50px 0;
   @media (max-width: 500px) {
-    width: 100%;
+      max-width: 100%;
   }
   div.container {
+    background-color: white;
+    white-space: initial;
     @media (max-width: 991px) {
       max-width: 500px;
     }
@@ -65,6 +56,16 @@ const Content = styled.div`
     font-size: 1.05em;
     text-align: left;
     font-family: 'Cairo', sans-serif;
+  }
+`
+
+const ItemNav = styled.div`
+  div {
+    color: white;
+  }
+  div:hover {
+    background-color: rgb(31, 31, 31) !important;
+    transition: all 0.2s;
   }
 `
 
@@ -107,7 +108,7 @@ export default class extends React.Component {
         style={this.props.style}
         onClick={e => this.readyToLeave && this.props.itemDetailsHandler()}
       >
-        <ContentContainer>
+        <Centered>
           {this.state.isLoading === false &&
               <Motion
                 defaultStyle={{t: -50, o: 0}}
@@ -146,27 +147,45 @@ export default class extends React.Component {
                             <h3>{this.state.detailsData.title}</h3>
                             <hr/>
                             <p>{this.state.detailsData.content}</p>
-                            <a
-                              onClick={(e) => {
-                                this.aniStyle = 3
-                                this.props.itemDetailsPrev(this.props.sort)
-                              }}
-                            >prev</a>
-                            <a
-                              onClick={(e) => {
-                                this.aniStyle = 2
-                                this.props.itemDetailsNext(this.props.sort)
-                              }}
-                            >next</a>
                           </div>
                         </div>
+                        <ItemNav
+                          className='row'
+                          style={{
+                            fontSize: '15px',
+                            letterSpacing: '4px'
+                          }}
+                        >
+                          <div
+                            style={{
+                              padding: '10px 0',
+                              backgroundColor: 'rgb(0, 153, 255)'
+                            }}
+                            className='col-xs-6'
+                            onClick={(e) => {
+                              this.aniStyle = 3
+                              this.props.itemDetailsPrev(this.props.sort)
+                            }}
+                          >PREV</div>
+                          <div
+                            style={{
+                              padding: '10px 0',
+                              backgroundColor: 'rgb(0, 153, 255)'
+                            }}
+                            className='col-xs-6'
+                            onClick={(e) => {
+                              this.aniStyle = 2
+                              this.props.itemDetailsNext(this.props.sort)
+                            }}
+                          >NEXT</div>
+                        </ItemNav>
                       </div>
                     </Content>
                   )
                 }}
               </Motion>
           }
-        </ContentContainer>
+        </Centered>
       </Container>
     )
   }

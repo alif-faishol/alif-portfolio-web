@@ -12,32 +12,31 @@ import registerServiceWorker from './registerServiceWorker'
 import '../node_modules/typicons.font/src/font/typicons.css'
 
 injectGlobal(["@import url('https://fonts.googleapis.com/css?family=Cairo:200,400,600');"])
+injectGlobal(["html,html>body,html>body>#root{height:100%;}"])
 
-const Container = styled.div`
-  position: relative;
-  @media (min-width: 1199px) and (max-width: 1280px) {
-    margin: 0 50px;
-  }
-  @media (min-width: 992px) and (max-width: 1080px) {
-    margin: 0 50px;
-  }
+const RootDiv = styled.div`
   background-color: white;
-`
-
-const PageContainer = styled.div`
-  padding: 0 100px;
-  @media (max-width: 767px) and (min-width: 600px) {
-    width: 550px;
-    margin: auto;
+  font-family: 'Cairo', sans-serif;
+  & #navbar-container {
+    @media (max-width: 767px) {
+      float: none;
+      margin: 0 auto;
+      max-width: 500px;
+      height: 50px;
+    }
   }
-  @media (max-width: 599px) {
-    padding: 0 10%;
+  & #content-container {
+    @media (max-width: 767px) {
+      float: none;
+      margin: 0 auto;
+      max-width: 500px;
+    }
   }
 `
 
 render(
   <BrowserRouter>
-    <div className='container'>
+    <RootDiv className='container-fluid' style={{height: '100%', minHeight: '500px', maxWidth: '1600px'}}>
       <Helmet>
         <meta property="og:title" content="Homepage of Alif's Website" />
         <meta property="og:description" content="Here lies some of Alif's works, and possibly there will be some article." />
@@ -47,17 +46,17 @@ render(
         <meta property="og:site_name" content="Alif's Portfolio Website" />
         <meta name="twitter:image:alt" content="Logo of Alif Faishol" />
       </Helmet>
-      <Container style={{position: 'fixed', zIndex: '99'}}>
-        <NavBar/>
-      </Container>
-      <Container>
-        <PageContainer>
+      <div className='row'>
+        <div id='navbar-container' className='col-lg-offset-1 col-md-1 col-sm-2 col-xs-12'>
+          <NavBar/>
+        </div>
+        <div id='content-container' className='col-lg-8 col-md-10 col-sm-8 col-xs-12'>
           <Route exact path='/' component={HomePage} />
           <Route exact path='/portfolio' component={Portfolio} />
           <Route exact path='/about' component={About} />
-        </PageContainer>
-      </Container>
-    </div>
+        </div>
+      </div>
+    </RootDiv>
   </BrowserRouter>, document.getElementById('root'))
 
 registerServiceWorker()

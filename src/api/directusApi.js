@@ -1,9 +1,9 @@
 import {get} from 'axios'
 
-export const apiRoot = 'https://directusapi.alifaishol-test.tk'
+const apiRoot = 'https://directusapi.alifaishol-test.tk'
 const api = props => get(apiRoot + '/api/1.1/' + props).then(res => res.data)
 
-export const portfolioThumbnail = ({sort,offset,limit} = {sort: ['id', 'ASC'], offset: 0, limit: 200}) => {
+const portfolioThumbnail = ({sort,offset,limit} = {sort: ['id', 'ASC'], offset: 0, limit: 200}) => {
   return api('tables/portfolio/rows?limit=' + limit + '&offset=' + offset)
     .then(res => {
       return res.data.map(index => {
@@ -18,7 +18,7 @@ export const portfolioThumbnail = ({sort,offset,limit} = {sort: ['id', 'ASC'], o
     .catch(err => console.log(err))
 }
 
-export const portfolioItemDetails = (id) => {
+const portfolioItemDetails = (id) => {
   return api('tables/portfolio/rows/' + id)
     .then(res => {
       return {
@@ -35,3 +35,8 @@ export const portfolioItemDetails = (id) => {
     .catch(err => console.log(err))
 }
 
+export default {
+  apiRoot,
+  portfolioThumbnail,
+  portfolioItemDetails
+}
